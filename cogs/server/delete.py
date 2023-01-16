@@ -24,9 +24,6 @@ class DeleteMessages(commands.GroupCog, name = "delete"):
     def from_user(self, message, user):
         return message.author.id == user.id
 
-    def check(self, message):
-        pass
-
     @app_commands.command(name = "messages", description = "Xóa tin nhắn")
     async def _text(self, interaction : Interaction, word : Optional[str] = "",  
                     user : Optional[Member] = None, file : Optional[bool] = False,
