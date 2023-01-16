@@ -1,6 +1,6 @@
-from discord import app_commands, Interaction, Embed, Member, Role
+from discord import app_commands, Interaction, Member
 from discord.ext import commands
-from typing import Optional, List
+from typing import Optional
 
 from re import findall
 import asyncio
@@ -46,6 +46,7 @@ class DeleteMessages(commands.GroupCog, name = "delete"):
             value = 0
             if word != "" and word in message.content.lower():
                 value += 1
+                 
             
             if user is not None and user.id == message.author.id:
                 value += 2

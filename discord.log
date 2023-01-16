@@ -200,3 +200,9 @@ discord.app_commands.errors.CommandInvokeError: Command 'text' raised an excepti
 [16/01/2023 10:52:29] [INFO    ] discord.client: logging in using static token
 [16/01/2023 10:52:35] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 350b37e5c4a5587dbd761ca08eacdb1c).
 [16/01/2023 10:52:57] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/933574369337290802 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 11:48:35] [INFO    ] discord.client: logging in using static token
+[16/01/2023 11:48:59] [INFO    ] discord.client: logging in using static token
+[16/01/2023 11:49:35] [INFO    ] discord.client: logging in using static token
+[16/01/2023 11:49:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: a8fc1bfcd03ff029ea342dac97732e34).
+[16/01/2023 11:54:31] [INFO    ] discord.client: logging in using static token
+[16/01/2023 11:54:38] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 137ea1b40cea72a56a37ffabe97d84a2).
