@@ -3,18 +3,11 @@ from discord.ext import commands
 from typing import Optional, List
 
 from re import findall
+import asyncio
 
 class DeleteMessages(commands.GroupCog, name = "delete"):
     def __init__(self, bot):
         self.bot = bot
-        
-    async def link_autocomplete(self, interaction: Interaction, current: bool,
-                                ) -> List[app_commands.Choice[str]]:
-        choices = ["True", "False"]
-        return [
-            app_commands.Choice(name = choice, value = choice)
-            for choice in choices if current.lower() in choice.lower()
-        ]
         
     def has_word(self, message, word):
         return word in message
@@ -32,27 +25,48 @@ class DeleteMessages(commands.GroupCog, name = "delete"):
         return message.author.id == user.id
 
     def check(self, message):
+        pass
 
     @app_commands.command(name = "messages", description = "Xóa tin nhắn")
-    async def _msg(self, interaction : Interaction,
-                          word : Optional[str] = None, link : Optional[bool] = None, 
-                          file : Optional[bool] = None, user : Optional[Member] = None,
-                          limit : int = 50):
-        check_value = {
-            1 : word,
-            2 : link,
-            4 : user,
-            8 : file
-        }
-        value_for_delete = 0
-        for k, v in check_value.items():
-            if v is not None:
-                value_for_delete += k
+    async def _text(self, interaction : Interaction, word : Optional[str] = "",  
+                    user : Optional[Member] = None, file : Optional[bool] = False,
+                    limit : app_commands.Range[int, 1, 50] = 20):
+        await interaction.response.defer()
+        word = word.lower()
         
-        
+        # 1 : word, 2 : user, 4 : file
+        decide_val = 0
+        if word != "":
+            decide_val += 1
+        if user != None:
+            decide_val += 2
+        if file:
+            decide_val += 4
+            
         channel = interaction.channel
-        #async for message in channel.history(limit = limit):
-        await interaction.response.send_message("GG")
+        count = 0
+        async for message in channel.history(limit = limit + 10):
+            value = 0
+            if word != "" and word in message.content.lower():
+                value += 1
+            
+            if user is not None and user.id == message.author.id:
+                value += 2
+                
+            if file == True and len(message.attachments) != 0:
+                value += 4
+            
+            if value == decide_val:
+                await message.delete()
+                await asyncio.sleep(0.35)
+                count += 1
+
+            if count == limit:
+                break
+            
+        message = await interaction.followup.send(f"Đã xóa **{count}** tin nhắn", ephemeral = True)
+        await asyncio.sleep(2)
+        await message.delete()
     
 async def setup(bot : commands.Bot):
     await bot.add_cog(DeleteMessages(bot))

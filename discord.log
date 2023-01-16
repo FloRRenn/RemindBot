@@ -1,22 +1,70 @@
-[15/01/2023 18:16:00] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: ea528b0bee8725aced812d9cfda23e73).
-[15/01/2023 18:18:34] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:18:34] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:18:45] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 5fdb4edabe42a84492a633c392d1946e).
-[15/01/2023 18:18:51] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'create'
+[16/01/2023 09:47:41] [INFO    ] discord.client: logging in using static token
+[16/01/2023 09:48:30] [INFO    ] discord.client: logging in using static token
+[16/01/2023 09:48:36] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: dbab660f59d86a5c4380299c8e014811).
+[16/01/2023 10:06:38] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:06:45] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: cc91579a1d7c4a1bbc4707751d887ab7).
+[16/01/2023 10:09:24] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:09:31] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b4348cf07f2cf357a8dab8c7f9199edf).
+[16/01/2023 10:11:33] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:11:40] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c08c2f848b5157df3942608054f70255).
+[16/01/2023 10:12:04] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:12:11] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6f4ea1664eeaa49720fc6b00c598df42).
+[16/01/2023 10:12:32] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064143612998320199 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:33] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064142845784641546 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:34] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064142109436825621 responded with 429. Retrying in 0.39 seconds.
+[16/01/2023 10:12:35] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064141611560345660 responded with 429. Retrying in 0.35 seconds.
+[16/01/2023 10:12:37] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064140953314668606 responded with 429. Retrying in 0.31 seconds.
+[16/01/2023 10:12:38] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064140201263386724 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:40] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064139682025324564 responded with 429. Retrying in 0.39 seconds.
+[16/01/2023 10:12:41] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064139349115015218 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:42] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064138122461454360 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:43] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064108211109646356 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:45] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064083166844956672 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:46] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064082704674586715 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:47] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064082425233297428 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:48] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064082221956341821 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:49] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064081822104948776 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:50] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064080524978700308 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:51] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064079383377215488 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:52] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064076347628064788 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:12:53] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064061515059167295 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:13:49] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:13:55] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8e7299e1b2c8e63a5c18d378abd03672).
+[16/01/2023 10:14:19] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064040426727813140 responded with 429. Retrying in 0.46 seconds.
+[16/01/2023 10:14:20] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064040095176458264 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:14:21] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064038412035817582 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:14:22] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064038215134228561 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:14:23] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064038047546622148 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:14:24] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064037845414723654 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:14:26] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1064036874982797414 responded with 429. Retrying in 0.50 seconds.
+[16/01/2023 10:16:00] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:16:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: efd9478fceafdab0d6eb9b3c072b2b54).
+[16/01/2023 10:16:31] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:16:37] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 859cd28767d206da635ecbf43720c98f).
+[16/01/2023 10:17:08] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/935402756129304627/messages/1063424677122429008 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:18:04] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:18:11] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 27a3840d35533c06afb6807161d165dd).
+[16/01/2023 10:19:11] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:19:18] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 5d3f69958e1a816d47cdcfbeab2e0899).
+[16/01/2023 10:21:10] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:21:17] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 9f789469893f6bd0a25bc96bdf52dc01).
+[16/01/2023 10:22:59] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:23:05] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: ae88a0d981f5ddb1298393a111df3cb7).
+[16/01/2023 10:24:11] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:24:18] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 2a342e8c1b0548a7258371c5d2299a11).
+[16/01/2023 10:25:09] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:25:16] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 79ec95e219faaf71ba2958f1bca15bdb).
+[16/01/2023 10:26:38] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:26:44] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: f014a7e727e936afceffb8eed857dcda).
+[16/01/2023 10:27:33] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:27:39] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: eed29170b4a11a65a107d2139233e41e).
+[16/01/2023 10:27:53] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'text'
 Traceback (most recent call last):
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
     return await self._callback(self.binding, interaction, **params)  # type: ignore
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\cogs\server\channel.py", line 40, in _create
-    find = await self.db.find({"onwerID" : member.id, "guildID" : guild.id})
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\ultils\db_action.py", line 30, in find
-    return json.loads(pprint.pformat(i))
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\__init__.py", line 357, in loads
-    return _default_decoder.decode(s)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
+  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\RemindBot\cogs\server\delete.py", line 43, in _text
+    print("=>>", user.id, user.discriminator)
+AttributeError: 'NoneType' object has no attribute 'id'
 
 The above exception was the direct cause of the following exception:
 
@@ -27,99 +75,50 @@ Traceback (most recent call last):
     return await self._do_call(interaction, transformed_values)
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
     raise CommandInvokeError(self, e) from e
-discord.app_commands.errors.CommandInvokeError: Command 'create' raised an exception: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
-[15/01/2023 18:20:27] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:20:27] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:20:39] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: aea84357002ab752332a7752f2603f9a).
-[15/01/2023 18:20:50] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'create'
+discord.app_commands.errors.CommandInvokeError: Command 'text' raised an exception: AttributeError: 'NoneType' object has no attribute 'id'
+[16/01/2023 10:28:55] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:29:02] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 26d5289e71c382a5c5c9907c7a5f8c75).
+[16/01/2023 10:30:30] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:30:36] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7e846e36d89b851e88d17a7a086e7918).
+[16/01/2023 10:31:19] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:31:26] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e6af85535618ad1adb15f7e73fe375a0).
+[16/01/2023 10:31:57] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:32:04] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: a6c97d07d8eda7a1937dd2d9305866cb).
+[16/01/2023 10:32:45] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948085339321430046 responded with 429. Retrying in 0.42 seconds.
+[16/01/2023 10:32:46] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948085247818473563 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:32:47] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948084421645451305 responded with 429. Retrying in 0.33 seconds.
+[16/01/2023 10:32:48] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948084280532303933 responded with 429. Retrying in 0.36 seconds.
+[16/01/2023 10:32:49] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948084182322655282 responded with 429. Retrying in 0.33 seconds.
+[16/01/2023 10:32:50] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948083959613493278 responded with 429. Retrying in 0.34 seconds.
+[16/01/2023 10:32:51] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948083834967162951 responded with 429. Retrying in 0.32 seconds.
+[16/01/2023 10:32:52] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948083567613853737 responded with 429. Retrying in 0.34 seconds.
+[16/01/2023 10:32:53] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948083010899693629 responded with 429. Retrying in 0.31 seconds.
+[16/01/2023 10:32:54] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948082920856383520 responded with 429. Retrying in 0.36 seconds.
+[16/01/2023 10:32:55] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948082553003311124 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:32:56] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948082431200751666 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:33:29] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:33:36] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: f43610c1b1c22e90bab328d5756844c9).
+[16/01/2023 10:34:03] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967623378301251635 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:04] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967623377978277978 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:05] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967623352447545374 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:06] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967623351793229924 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:07] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967623326459654204 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:08] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967623326094753854 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:09] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967621947246665758 responded with 429. Retrying in 0.54 seconds.
+[16/01/2023 10:34:11] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967621940422508575 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:12] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967621939923390535 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:34:13] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967621923708211221 responded with 429. Retrying in 0.60 seconds.
+[16/01/2023 10:34:15] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'text'
 Traceback (most recent call last):
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
     return await self._callback(self.binding, interaction, **params)  # type: ignore
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\cogs\server\channel.py", line 43, in _create
-    data = loads(find)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\__init__.py", line 357, in loads
-    return _default_decoder.decode(s)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\tree.py", line 1242, in _call
-    await command._invoke_with_namespace(interaction, namespace)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 887, in _invoke_with_namespace
-    return await self._do_call(interaction, transformed_values)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
-    raise CommandInvokeError(self, e) from e
-discord.app_commands.errors.CommandInvokeError: Command 'create' raised an exception: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
-[15/01/2023 18:21:31] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:21:31] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:21:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b06589f2f4a1901d7b6d80585fcfa658).
-[15/01/2023 18:22:59] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:22:59] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:23:10] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7a44e06d9a765a94078952a6d7127024).
-[15/01/2023 18:23:45] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'create'
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
-    return await self._callback(self.binding, interaction, **params)  # type: ignore
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\cogs\server\channel.py", line 43, in _create
-    print(dict(find))
-ValueError: dictionary update sequence element #0 has length 1; 2 is required
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\tree.py", line 1242, in _call
-    await command._invoke_with_namespace(interaction, namespace)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 887, in _invoke_with_namespace
-    return await self._do_call(interaction, transformed_values)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
-    raise CommandInvokeError(self, e) from e
-discord.app_commands.errors.CommandInvokeError: Command 'create' raised an exception: ValueError: dictionary update sequence element #0 has length 1; 2 is required
-[15/01/2023 18:25:13] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:25:13] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:25:24] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 0e14486e8a3064f8cafc7cffa3280252).
-[15/01/2023 18:26:48] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'create'
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
-    return await self._callback(self.binding, interaction, **params)  # type: ignore
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\cogs\server\channel.py", line 44, in _create
-    data = loads(data)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\__init__.py", line 357, in loads
-    return _default_decoder.decode(s)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 337, in decode
-    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\json\decoder.py", line 353, in raw_decode
-    obj, end = self.scan_once(s, idx)
-json.decoder.JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\tree.py", line 1242, in _call
-    await command._invoke_with_namespace(interaction, namespace)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 887, in _invoke_with_namespace
-    return await self._do_call(interaction, transformed_values)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
-    raise CommandInvokeError(self, e) from e
-discord.app_commands.errors.CommandInvokeError: Command 'create' raised an exception: JSONDecodeError: Expecting property name enclosed in double quotes: line 1 column 2 (char 1)
-[15/01/2023 18:40:16] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:40:16] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:40:27] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e0382c5c01721631f140ebbcb22ea8cc).
-[15/01/2023 18:43:34] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'add_user'
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
-    return await self._callback(self.binding, interaction, **params)  # type: ignore
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\cogs\server\channel.py", line 69, in _add_user
-    return await interaction.followup.send(f"Bạn không phải chủ phòng này")
+  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\RemindBot\cogs\server\delete.py", line 58, in _text
+    await interaction.followup.send(f"Đã xóa **{count}** tin nhắn", ephemeral = True)
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\webhook\async_.py", line 1726, in send
     data = await adapter.execute_webhook(
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\webhook\async_.py", line 218, in request
     raise NotFound(response, data)
-discord.errors.NotFound: 404 Not Found (error code: 10015): Unknown Webhook
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
 
 The above exception was the direct cause of the following exception:
 
@@ -130,18 +129,31 @@ Traceback (most recent call last):
     return await self._do_call(interaction, transformed_values)
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
     raise CommandInvokeError(self, e) from e
-discord.app_commands.errors.CommandInvokeError: Command 'add_user' raised an exception: NotFound: 404 Not Found (error code: 10015): Unknown Webhook
-[15/01/2023 18:44:36] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'add_user'
+discord.app_commands.errors.CommandInvokeError: Command 'text' raised an exception: NotFound: 404 Not Found (error code: 10008): Unknown Message
+[16/01/2023 10:36:27] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:36:34] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 4a64debf708cdee8709a7bac69002729).
+[16/01/2023 10:37:59] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:38:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6086816f26f96c360d5bf25da941cee1).
+[16/01/2023 10:38:36] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/967621796616618054 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:38:38] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/959002178738077716 responded with 429. Retrying in 0.37 seconds.
+[16/01/2023 10:38:39] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948087230939951134 responded with 429. Retrying in 0.35 seconds.
+[16/01/2023 10:38:40] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948087229362897006 responded with 429. Retrying in 0.34 seconds.
+[16/01/2023 10:38:41] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948085255158517821 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:38:43] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948083571707490375 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:38:45] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948082922932535377 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:38:46] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948082190225408072 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:38:48] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948081715363070043 responded with 429. Retrying in 0.43 seconds.
+[16/01/2023 10:38:49] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'text'
 Traceback (most recent call last):
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
     return await self._callback(self.binding, interaction, **params)  # type: ignore
-  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\bot\cogs\server\channel.py", line 69, in _add_user
-    return await interaction.response.send_message(f"Bạn không phải chủ phòng này")
+  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\RemindBot\cogs\server\delete.py", line 59, in _text
+    message = await interaction.followup.send(f"Đã xóa **{count}** tin nhắn", ephemeral = True)
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\webhook\async_.py", line 1726, in send
     data = await adapter.execute_webhook(
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\webhook\async_.py", line 218, in request
     raise NotFound(response, data)
-discord.errors.NotFound: 404 Not Found (error code: 10015): Unknown Webhook
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
 
 The above exception was the direct cause of the following exception:
 
@@ -152,205 +164,39 @@ Traceback (most recent call last):
     return await self._do_call(interaction, transformed_values)
   File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
     raise CommandInvokeError(self, e) from e
-discord.app_commands.errors.CommandInvokeError: Command 'add_user' raised an exception: NotFound: 404 Not Found (error code: 10015): Unknown Webhook
-[15/01/2023 18:45:02] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:45:02] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:45:13] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 36d965350225541d0e606a2190048ca4).
-[15/01/2023 18:49:54] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:49:54] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:50:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 22ce99ec3911264380d944cbd0e8d789).
-[15/01/2023 18:52:22] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 18:52:22] [INFO    ] discord.client: logging in using static token
-[15/01/2023 18:52:34] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 0d8436bc2d94c1595024eb92f0e86509).
-[15/01/2023 19:18:29] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 19:18:29] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:18:35] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 21af2e66af7e312c24a5610bdf97795a).
-[15/01/2023 19:31:45] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 19:31:45] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:31:51] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: fc3ac5bda10270e15f2ca6ab1940d13f).
-[15/01/2023 19:34:40] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 19:34:40] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:34:47] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 147ede5c2170e31a6c24722f8e31ae88).
-[15/01/2023 19:38:20] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 19:38:20] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:38:28] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 99c34e8d442c377c9d49901bf700b81f).
-[15/01/2023 19:39:54] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 19:39:54] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:40:00] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8ad9967422c6de45f4df4bd2fe861028).
-[15/01/2023 19:40:37] [WARNING ] discord.ext.commands.bot: Privileged message content intent is missing, commands may not work as expected.
-[15/01/2023 19:40:37] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:40:44] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b29dc2218ee02cc5ea667bcdee1ba775).
-[15/01/2023 19:49:58] [INFO    ] discord.client: logging in using static token
-[15/01/2023 19:50:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 39103dc41fe9df9edfa318f11f0a3f76).
-[15/01/2023 20:16:36] [INFO    ] discord.client: logging in using static token
-[15/01/2023 20:16:42] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8611f855434df02afb8f67172509c2e3).
-[15/01/2023 20:18:36] [INFO    ] discord.client: logging in using static token
-[15/01/2023 20:18:43] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 8be3797bc47c39fd459a2bbaef035875).
-[15/01/2023 20:19:37] [INFO    ] discord.client: logging in using static token
-[15/01/2023 20:19:44] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 74df75301ffdfd020b82e55f5e94d56a).
-[15/01/2023 20:25:56] [ERROR   ] discord.client: Attempting a reconnect in 0.26s
+discord.app_commands.errors.CommandInvokeError: Command 'text' raised an exception: NotFound: 404 Not Found (error code: 10008): Unknown Message
+[16/01/2023 10:42:26] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:42:33] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7a2446d0289ad4c465af49e3547a1f9d).
+[16/01/2023 10:49:05] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948065775762173982 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:49:07] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948065605456642078 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:49:09] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948065207870193745 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:49:10] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948065203172548668 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:49:12] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948064705111543859 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:49:14] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/948063867722956830 responded with 429. Retrying in 0.30 seconds.
+[16/01/2023 10:49:15] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'text'
 Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 999, in _create_direct_connection
-    hosts = await asyncio.shield(host_resolved)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 865, in _resolve_host
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\resolver.py", line 31, in resolve
-    infos = await self._loop.getaddrinfo(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 825, in getaddrinfo
-    return await self.run_in_executor(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\socket.py", line 918, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-socket.gaierror: [Errno 11001] getaddrinfo failed
+  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 861, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+  File "C:\Users\avart\OneDrive\Máy tính\remind_bot\RemindBot\cogs\server\delete.py", line 61, in _text
+    message = await interaction.followup.send(f"Đã xóa **{count}** tin nhắn", ephemeral = True)
+  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\webhook\async_.py", line 1726, in send
+    data = await adapter.execute_webhook(
+  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\webhook\async_.py", line 218, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10008): Unknown Message
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\client.py", line 624, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 494, in wait_for
-    return fut.result()
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\gateway.py", line 372, in from_client
-    socket = await client.http.ws_connect(str(url))
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\http.py", line 536, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 754, in _ws_connect
-    resp = await self.request(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 520, in _request
-    conn = await self._connector.connect(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 535, in connect
-    proto = await self._create_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 892, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 1011, in _create_direct_connection
-    raise ClientConnectorError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [getaddrinfo failed]
-[15/01/2023 20:25:56] [ERROR   ] discord.client: Attempting a reconnect in 2.86s
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 999, in _create_direct_connection
-    hosts = await asyncio.shield(host_resolved)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 865, in _resolve_host
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\resolver.py", line 31, in resolve
-    infos = await self._loop.getaddrinfo(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 825, in getaddrinfo
-    return await self.run_in_executor(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\socket.py", line 918, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-socket.gaierror: [Errno 11001] getaddrinfo failed
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\client.py", line 624, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 494, in wait_for
-    return fut.result()
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\gateway.py", line 372, in from_client
-    socket = await client.http.ws_connect(str(url))
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\http.py", line 536, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 754, in _ws_connect
-    resp = await self.request(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 520, in _request
-    conn = await self._connector.connect(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 535, in connect
-    proto = await self._create_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 892, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 1011, in _create_direct_connection
-    raise ClientConnectorError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [getaddrinfo failed]
-[15/01/2023 20:36:53] [ERROR   ] discord.client: Attempting a reconnect in 6.77s
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 999, in _create_direct_connection
-    hosts = await asyncio.shield(host_resolved)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 865, in _resolve_host
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\resolver.py", line 31, in resolve
-    infos = await self._loop.getaddrinfo(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 825, in getaddrinfo
-    return await self.run_in_executor(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\socket.py", line 918, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-socket.gaierror: [Errno 11001] getaddrinfo failed
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\client.py", line 624, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 494, in wait_for
-    return fut.result()
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\gateway.py", line 372, in from_client
-    socket = await client.http.ws_connect(str(url))
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\http.py", line 536, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 754, in _ws_connect
-    resp = await self.request(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 520, in _request
-    conn = await self._connector.connect(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 535, in connect
-    proto = await self._create_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 892, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 1011, in _create_direct_connection
-    raise ClientConnectorError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [getaddrinfo failed]
-[15/01/2023 20:37:00] [ERROR   ] discord.client: Attempting a reconnect in 10.12s
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 999, in _create_direct_connection
-    hosts = await asyncio.shield(host_resolved)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 865, in _resolve_host
-    addrs = await self._resolver.resolve(host, port, family=self._family)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\resolver.py", line 31, in resolve
-    infos = await self._loop.getaddrinfo(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\base_events.py", line 825, in getaddrinfo
-    return await self.run_in_executor(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\concurrent\futures\thread.py", line 57, in run
-    result = self.fn(*self.args, **self.kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\socket.py", line 918, in getaddrinfo
-    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
-socket.gaierror: [Errno 11001] getaddrinfo failed
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\client.py", line 624, in connect
-    self.ws = await asyncio.wait_for(coro, timeout=60.0)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\asyncio\tasks.py", line 494, in wait_for
-    return fut.result()
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\gateway.py", line 372, in from_client
-    socket = await client.http.ws_connect(str(url))
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\http.py", line 536, in ws_connect
-    return await self.__session.ws_connect(url, **kwargs)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 754, in _ws_connect
-    resp = await self.request(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\client.py", line 520, in _request
-    conn = await self._connector.connect(
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 535, in connect
-    proto = await self._create_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 892, in _create_connection
-    _, proto = await self._create_direct_connection(req, traces, timeout)
-  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\aiohttp\connector.py", line 1011, in _create_direct_connection
-    raise ClientConnectorError(req.connection_key, exc) from exc
-aiohttp.client_exceptions.ClientConnectorError: Cannot connect to host gateway-us-east1-d.discord.gg:443 ssl:default [getaddrinfo failed]
-[15/01/2023 20:37:11] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
-[15/01/2023 20:37:18] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 01a5ab684ff2572b1a27531cdaccedbd).
-[15/01/2023 20:38:16] [INFO    ] discord.client: logging in using static token
-[15/01/2023 20:38:23] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 913806e0c89e4f55cd21a305ec54edad).
-[15/01/2023 20:58:47] [INFO    ] discord.client: logging in using static token
-[15/01/2023 20:58:54] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b687b9a111906116b573f66ef0704f63).
-[15/01/2023 20:59:24] [INFO    ] discord.client: logging in using static token
-[15/01/2023 20:59:33] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c2e95be38955b91a6bd3bc215f2a54e7).
-[15/01/2023 21:00:24] [INFO    ] discord.client: logging in using static token
-[15/01/2023 21:00:32] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 9da32334e02cfcf9260c0f90529354b4).
-[15/01/2023 21:01:15] [INFO    ] discord.client: logging in using static token
-[15/01/2023 21:01:23] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6092726c55e1b18bc18516eae0ce5c92).
-[15/01/2023 21:02:46] [INFO    ] discord.client: logging in using static token
-[15/01/2023 21:02:53] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 7af0c189a3aaa367a8e7e117834e75c4).
+  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\tree.py", line 1242, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 887, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+  File "C:\Users\avart\AppData\Local\Programs\Python\Python38\lib\site-packages\discord\app_commands\commands.py", line 880, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'text' raised an exception: NotFound: 404 Not Found (error code: 10008): Unknown Message
+[16/01/2023 10:49:28] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:49:36] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e43faf0fa7736d586e4cf3f06689bc8a).
+[16/01/2023 10:52:29] [INFO    ] discord.client: logging in using static token
+[16/01/2023 10:52:35] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 350b37e5c4a5587dbd761ca08eacdb1c).
+[16/01/2023 10:52:57] [WARNING ] discord.http: We are being rate limited. DELETE https://discord.com/api/v10/channels/929978924107190292/messages/933574369337290802 responded with 429. Retrying in 0.30 seconds.
