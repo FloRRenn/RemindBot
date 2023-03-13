@@ -19,19 +19,24 @@ class Remind:
         return self.user.id
     
     def set_new_time(self, new_time):
-        self.time = new_time
+        if new_time != "":
+            self.time = new_time
     
     def set_new_end_date(self, new_end_date):
-        self.end_date = new_end_date
+        if new_end_date != "":
+            self.end_date = new_end_date
         
     def set_new_start_date(self, new_start_date):
-        self.start_date = new_start_date
+        if new_start_date != "":
+            self.start_date = new_start_date
     
     def set_new_mention_role(self, new_mention_role):
-        self.mention_role = new_mention_role
+        if new_mention_role is not None:
+            self.mention_role = new_mention_role
     
     def set_new_content(self, new_content):
-        self.content = new_content
+        if new_content != "":
+            self.content = new_content
     
     def send_embed(self):
         embed = Embed(title = "Reminder", description = self.content, colour = 0x00ff00)
@@ -73,13 +78,32 @@ class ManageReminder:
         self.list_remind.append(remind)
         self.db.insert(remind.to_dict())
         
-    def remove_remind(self, remindID):
+    def edit_remind(self, userID, remind_id, content, end_date, time, start_date, mention_who):
         for i in self.list_remind:
-            if i.get_remindID() == remindID:
+            if i.get_remindID() == remind_id and i.get_userID() == userID:
+                i.set_new_content(content)
+                i.set_new_end_date(end_date)
+                i.set_new_time(time)
+                i.set_new_start_date(start_date)
+                i.set_new_mention_role(mention_who)
+                self.db.update(i.to_dict())
+                return True
+        return False
+        
+    async def remove_remind(self, userID, remindID):
+        for i in self.list_remind:
+            if i.get_remindID() == remindID and i.get_userID() == userID:
                 self.list_remind.remove(i)
                 self.db.remove({"remindID" : remindID})
                 return True
         return False
+    
+    async def get_list_remind_from_user(self, userID):
+        list_remind = []
+        for i in self.list_remind:
+            if i.get_userID() == userID:
+                list_remind.append(i.send_embed())
+        return list_remind
     
     async def check_list(self):
         for i in self.list_remind:
@@ -92,5 +116,4 @@ class ManageReminder:
             if i.get_remindID() == remindID:
                 return i.send_embed()
         return None
-
         

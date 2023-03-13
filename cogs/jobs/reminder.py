@@ -33,3 +33,35 @@ class Reminder(commands.GroupCog, name = "remind"):
         self.reminders.add_remind(reminder)
         await interaction.response.send_message(embed = reminder.send_embed(), ephemeral = True)
         
+    @app_commands.command(name = "list_remind", description = "List all reminders")
+    async def _list_remind(self, interaction : Interaction):
+        await interaction.response.defer()
+        
+        userID = interaction.user.id
+        list_remind = await self.reminders.get_list_remind_from_user(userID)
+        
+        if list_remind is not None:
+            for i in list_remind:
+                await interaction.followup.send(embed = i, ephemeral = True)
+        else:
+            await interaction.followup.send(embed = Embed(title = "Reminder", description = "Bạn không bất kỳ lịch nhắc nào", colour = 0x00ff00), ephemeral = True)
+            
+    @app_commands.command(name = "delete_remind", description = "Delete a reminder")
+    async def _delete_remind(self, interaction : Interaction, remind_id : int):
+        userID = interaction.user.id
+        result = await self.reminders.remove_remind(userID, remind_id)
+        if result:
+            await interaction.response.send_message("Đã xóa thành công", ephemeral = True)
+        else:
+            await interaction.response.send_message("Không tìm thấy lịch nhắc", ephemeral = True)
+            
+    @app_commands.command(name = "edit_remind", description = "Edit a reminder")
+    async def edit_remind(self, interaction : Interaction, remind_id : int, 
+                          content : Optional[str] = "", 
+                          end_date : Optional[str] = "", time : Optional[str] = "", start_date : Optional[str] = "", 
+                          mention_who : Optional[Member] = None):
+        userID = interaction.user.id
+        if self.reminders.edit_remind(userID, remind_id, content, end_date, time, start_date, mention_who):
+            await interaction.response.send_message("Đã sửa thành công", ephemeral = True)
+        else:
+            await interaction.response.send_message("Không tìm thấy lịch nhắc", ephemeral = True)
