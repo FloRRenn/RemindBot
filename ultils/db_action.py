@@ -3,39 +3,41 @@ from dotenv import load_dotenv
 from os import getenv
 import pprint
 
+from pymongo import MongoClient
+
 load_dotenv()
+CONNECTION_STRING = getenv("MONGODB_URI")
+cluster = MongoClient(CONNECTION_STRING)
+db = cluster["discordDB"]
 
 class Database:
     def __init__(self, collection_name):
-        self.CONNECTION_STRING = getenv("MONGODB_URI")
-        # cluster = MongoClient(CONNECTION_STRING)
-        # self.db = cluster["discordDB"]
-        self.collection = collection_name
-        self.db = None
+        self.collection = db[collection_name]
     
-    async def connect(self):
-        client = motor.motor_asyncio.AsyncIOMotorClient(self.CONNECTION_STRING)
-        cluster = client['discordDB']
-        self.db = cluster[self.collection]
+    # async def connect(self):
+    #     client = motor.motor_asyncio.AsyncIOMotorClient(self.CONNECTION_STRING)
+    #     cluster = client['discordDB']
+    #     self.db = cluster[self.collection]
         
-    async def insert(self, key):
-        await self.db.insert_one(key)
+    def insert(self, key):
+        self.collection.insert_one(key)
         
-    async def find(self, key):
-        find = self.db.find(key)
+    def get_all(self):
+        return self.collection.find({})
+        
+    def find(self, key):
+        find = self.collection.find(key)
         if not find:
             return None
         
-        async for i in find:
+        for i in find:
             return pprint.pformat(i)
         
-    async def remove(self, key):
-        await self.db.delete_one(key)
+    def remove(self, key):
+        self.collection.delete_one(key)
         
-async def getDB(name):
-    db = Database(name)
-    await db.connect()
-    return db
+    def update(self, key):
+        self.collection.update_one(key)
 
 
         
