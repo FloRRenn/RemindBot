@@ -1,6 +1,7 @@
 from discord import app_commands, Interaction, Member, NotFound, Forbidden, HTTPException 
 from discord.ext import commands
 from typing import Optional
+from ultils.time_convert import timedelta_format
 
 class Moderator(commands.GroupCog, name = "mod"):
     def __init__(self, bot):
@@ -57,6 +58,10 @@ class Moderator(commands.GroupCog, name = "mod"):
                        minutes: app_commands.Range[int, 0, 60] = 0, seconds: app_commands.Range[int, 0, 60] = 0):
         if interaction.user.id == user.id:
             return interaction.response.send_message("Bruh, tự timeout bản thân.", ephemeral = True)
+        
+        timestamp = timedelta_format(hours, minutes, seconds)
+        await user.timeout(until = timestamp, reason = reason)
+        await interaction.response.send_message(f"Đã timeout user {user.mention} trong {hours}:{minutes}:{seconds}", ephemeral = False)
 
 async def setup(bot : commands.Bot):
     await bot.add_cog(Moderator(bot))

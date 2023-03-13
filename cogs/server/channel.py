@@ -105,14 +105,14 @@ class ManageChannel(commands.GroupCog, name = "channel"):
     async def _kick_user(self, interaction : Interaction, user : Optional[Member], role : Optional[Role]):
         await self.modifyChannel(interaction, False, user, role)
         
-    @app_commands.command(name = "test")
-    async def _test(self, interaction : Interaction):
-        await interaction.response.send_message("Sent key")
-        db = await getDB("rooms")
-        test_key = {
-            "aa" : 1212342
-        }
-        await db.insert(test_key)
+    # @app_commands.command(name = "test")
+    # async def _test(self, interaction : Interaction):
+    #     await interaction.response.send_message("Sent key")
+    #     db = await getDB("rooms")
+    #     test_key = {
+    #         "aa" : 1212342
+    #     }
+    #     await db.insert(test_key)
         
 async def setup(bot : commands.Bot):
     db = await getDB("rooms")
