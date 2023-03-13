@@ -1,5 +1,5 @@
 from discord import app_commands, Interaction, Member, TextChannel, Embed
-from discord.ext import commands
+from discord.ext import commands, tasks
 from typing import Optional
 
 from ultils.db_action import Database
@@ -10,11 +10,13 @@ class Reminder(commands.GroupCog, name = "remind"):
         self.bot = bot
         self.db = Database("reminders")
         self.reminders = ManageReminder(self.db)
+        self.channel_id = {}
         
     @app_commands.command(name = "remind", description = "Set a default channel for reminder")
     async def _set_default_channel(self, interaction : Interaction, channel : TextChannel):
         data = {
             "default_channel": channel.id,
+            "guild_id": interaction.guild.id
         }
         
         if self.db.find(data) is None:
@@ -29,6 +31,9 @@ class Reminder(commands.GroupCog, name = "remind"):
                       end_date : str, time : Optional[str] = "", start_date : Optional[str] = "", 
                       mention_who : Optional[Member] = None):
         
+        if interaction.guild.id not in self.channel_id:
+            self._set_default_channel(interaction, interaction.channel)
+            
         reminder = Remind(content, end_date, time, start_date, mention_who)
         self.reminders.add_remind(reminder)
         await interaction.response.send_message(embed = reminder.send_embed(), ephemeral = True)
@@ -65,3 +70,10 @@ class Reminder(commands.GroupCog, name = "remind"):
             await interaction.response.send_message("Đã sửa thành công", ephemeral = True)
         else:
             await interaction.response.send_message("Không tìm thấy lịch nhắc", ephemeral = True)
+            
+    @tasks.loop(seconds = 60)
+    async def check_remind(self):
+        expired = [i for i in await self.reminders.check_list()]
+        for i in expired:
+            await 
+        
