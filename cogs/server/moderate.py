@@ -51,15 +51,15 @@ class Moderator(commands.GroupCog, name = "mod"):
         except HTTPException:
             await interaction.response.send_message(f"Bạn không thể kick {user.mention}", ephemeral = True)
             
-    @app_commands.command(name = "timeout", description = "Không cho phép user được tham gia hoạt động trong server như chat, voice")
+    @app_commands.command(name = "mute_user", description = "Mute user")
     @commands.has_permissions(moderate_members = True)
     async def _timeout(self, interaction : Interaction, user: Member, reason: Optional[str], 
-                       days: app_commands.Range[int, 1, 30] = 10, hours: app_commands.Range[int, 0, 24] = 1, 
+                       days: app_commands.Range[int, 0, 30] = 0, hours: app_commands.Range[int, 0, 24] = 1, 
                        minutes: app_commands.Range[int, 0, 60] = 0, seconds: app_commands.Range[int, 0, 60] = 0):
         if interaction.user.id == user.id:
             return interaction.response.send_message("Bruh, tự timeout bản thân.", ephemeral = True)
         
-        timestamp = timedelta_format(hours, minutes, seconds)
+        timestamp = timedelta_format(days, hours, minutes, seconds)
         await user.timeout(until = timestamp, reason = reason)
         await interaction.response.send_message(f"Đã timeout user {user.mention} trong {hours}:{minutes}:{seconds}", ephemeral = False)
 

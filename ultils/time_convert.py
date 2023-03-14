@@ -1,8 +1,8 @@
 from datetime import timedelta
 from re import findall
 
-def timedelta_format(hours : int, minutes : int, seconds : int):
-    return timedelta(hours = hours, minutes = minutes, seconds = seconds)
+def timedelta_format(days: int, hours : int, minutes : int, seconds : int):
+    return timedelta(days = days, hours = hours, minutes = minutes, seconds = seconds)
 
 def convert_to_date(seconds : float):
     time_format = str(timedelta(seconds = seconds))

@@ -1,5 +1,5 @@
 from discord import app_commands, Interaction, Embed, Member, PermissionOverwrite, Role
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 from typing import Optional
 import time
@@ -11,15 +11,21 @@ class ManageChannel(commands.GroupCog, name = "channel"):
     def __init__(self, bot : commands.Bot):
         self.bot = bot
         self.db = Database("rooms")
+        self.cache = []
+
+        self.check_room.start()
         
     async def addChannel(self, onwerID, channelID, guildID, time_remain):
+        timestamp = time_remain + time.time()
+
         data = {
             "onwerID": onwerID,
             "channelID": channelID,
             "guildID": guildID,
-            "timeToFinish": time_remain + time.time()
+            "timeToFinish": timestamp
         }
         self.db.insert(data)
+        self.cache.append(data)
         
     async def check_user(self, memberID, channelID, name):
         find = self.db.find({"onwerID" : memberID, name : channelID})
@@ -62,7 +68,7 @@ class ManageChannel(commands.GroupCog, name = "channel"):
         
         find = await self.check_user(member.id, guild.id, "guildID")
         if find:
-            return await interaction.followup.send(f"Phòng vẫn còn được sử dụng nên không thể tạo phòng khác", ephemeral = True)
+            return await interaction.followup.send(f"Phòng cũ vẫn còn được sử dụng nên không thể tạo phòng khác", ephemeral = True)
         
         overwrites = {
                 guild.default_role: PermissionOverwrite(read_messages=False, send_messages=False),
@@ -95,6 +101,14 @@ class ManageChannel(commands.GroupCog, name = "channel"):
             "channelID": channel.id,
         }
         self.db.remove(data)
+
+        index = 0
+        for room in self.cache:
+            if room["channelID"] == channel.id:
+                break
+            index += 1
+        self.cache.pop(index)
+
         try:
             await channel.delete()
         except:
@@ -107,16 +121,31 @@ class ManageChannel(commands.GroupCog, name = "channel"):
     @app_commands.command(name = "kick_user", description = "Kick user/role ra khỏi phòng của bạn")
     async def _kick_user(self, interaction : Interaction, user : Optional[Member], role : Optional[Role]):
         await self.modifyChannel(interaction, False, user, role)
+    
+    @tasks.loop(seconds = 60)
+    async def check_room(self):
+        if not self.cache:
+            return
         
-    # @app_commands.command(name = "test")
-    # async def _test(self, interaction : Interaction):
-    #     await interaction.response.send_message("Sent key")
-    #     db = await getDB("rooms")
-    #     test_key = {
-    #         "aa" : 1212342
-    #     }
-    #     await db.insert(test_key)
-        
+        timestamp = time.time()
+        index = 0
+        for room in self.cache:
+            if timestamp >= room["timeToFinish"]:
+                try:
+                    channel = self.bot.get_channel(room["channelID"])
+                    await channel.delete()
+
+                    self.db.remove(room)
+                    self.cache.pop(index)
+                except:
+                    continue
+            index += 1
+
+    @check_room.before_loop
+    async def wait_for_ready(self):
+        await self.bot.wait_until_ready()
+
+    
 async def setup(bot : commands.Bot):
     await bot.add_cog(ManageChannel(bot))
     
