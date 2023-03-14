@@ -1,7 +1,7 @@
 # ENV file
-.env
+/.env
 
 # Log file
-*.log
+/discord.log
 
 **/__pycache__
