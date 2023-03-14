@@ -1,4 +1,3 @@
-import motor.motor_asyncio
 from dotenv import load_dotenv
 from os import getenv
 import pprint

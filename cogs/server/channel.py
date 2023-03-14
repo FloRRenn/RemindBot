@@ -5,12 +5,12 @@ from typing import Optional
 import time
 
 from ultils import covert_str_to_seconds, convert_to_date
-from ultils import getDB
+from ultils import Database
 
 class ManageChannel(commands.GroupCog, name = "channel"):
-    def __init__(self, bot : commands.Bot, db):
+    def __init__(self, bot : commands.Bot):
         self.bot = bot
-        self.db = db
+        self.db = Database("rooms")
         
     async def addChannel(self, onwerID, channelID, guildID, time_remain):
         data = {
@@ -19,10 +19,10 @@ class ManageChannel(commands.GroupCog, name = "channel"):
             "guildID": guildID,
             "timeToFinish": time_remain + time.time()
         }
-        await self.db.insert(data)
+        self.db.insert(data)
         
     async def check_user(self, memberID, channelID, name):
-        find = await self.db.find({"onwerID" : memberID, name : channelID})
+        find = self.db.find({"onwerID" : memberID, name : channelID})
         if find:
             return True
         return False
@@ -94,8 +94,11 @@ class ManageChannel(commands.GroupCog, name = "channel"):
             "onwerID": member.id,
             "channelID": channel.id,
         }
-        await self.db.remove(data)
-        await channel.delete()
+        self.db.remove(data)
+        try:
+            await channel.delete()
+        except:
+            await interaction.response.send_message("Xảy ra lỗi khi xóa phòng. Dường như phòng đã bị xóa từ trước đó.", ephemeral = True)
         
     @app_commands.command(name = "add_user", description = "Thêm user/role vào phòng của bạn")
     async def _add_user(self, interaction : Interaction, user : Optional[Member], role : Optional[Role]):
@@ -115,6 +118,5 @@ class ManageChannel(commands.GroupCog, name = "channel"):
     #     await db.insert(test_key)
         
 async def setup(bot : commands.Bot):
-    db = await getDB("rooms")
-    await bot.add_cog(ManageChannel(bot, db))
+    await bot.add_cog(ManageChannel(bot))
     

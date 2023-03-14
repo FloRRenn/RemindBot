@@ -12,9 +12,10 @@ class Bot(commands.Bot):
         super().__init__(command_prefix = "$$", intents = discord.Intents.all())
         
     async def setup_hook(self):
-        cogs = ["bot.about", "bot.cmd",
-                "server.channel", "server.delete", "server.moderate",]
-                #"errors"]
+        # cogs = ["bot.about", "bot.cmd",
+        #         "server.channel", "server.delete", "server.moderate",]
+        cogs = ["server.channel", "server.delete", "server.moderate"]
+        
         for cog in cogs:
             await self.load_extension(f"cogs.{cog}")
         
