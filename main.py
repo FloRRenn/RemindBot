@@ -14,7 +14,7 @@ class Bot(commands.Bot):
     async def setup_hook(self):
         # cogs = ["bot.about", "bot.cmd",
         #         "server.channel", "server.delete", "server.moderate",]
-        cogs = ["server.channel", "server.delete", "server.moderate"]
+        cogs = ["jobs.reminder"]
         
         for cog in cogs:
             await self.load_extension(f"cogs.{cog}")

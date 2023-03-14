@@ -21,8 +21,8 @@ class Database:
     def insert(self, key):
         self.collection.insert_one(key)
         
-    def get_all(self):
-        return self.collection.find({})
+    def get_all(self, arg):
+        return self.collection.find(arg)
         
     def find(self, key):
         find = self.collection.find(key)
@@ -35,8 +35,8 @@ class Database:
     def remove(self, key):
         self.collection.delete_one(key)
         
-    def update(self, key):
-        self.collection.update_one(key)
+    def update(self, source, key):
+        self.collection.update_one(source, key)
 
 
         

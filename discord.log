@@ -332,3 +332,243 @@ discord.app_commands.errors.CommandInvokeError: Command 'delete' raised an excep
 [14/03/2023 09:16:48] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
 [14/03/2023 09:16:48] [INFO    ] discord.client: logging in using static token
 [14/03/2023 09:16:51] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 293a085c8925db9294dd75f38e371440).
+[14/03/2023 09:30:46] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 09:30:46] [INFO    ] discord.client: logging in using static token
+[14/03/2023 09:30:50] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 39a2d4368e465656a9798ecaf75ff1b4).
+[14/03/2023 09:48:58] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 09:48:58] [INFO    ] discord.client: logging in using static token
+[14/03/2023 09:50:02] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 09:50:02] [INFO    ] discord.client: logging in using static token
+[14/03/2023 09:50:07] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 0e6e38acb2d57110bd4d59e053fd22cd).
+[14/03/2023 09:52:25] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'new_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 41, in _set_remind
+    reminder = Remind(content, end_date, time, start_date, mention_who)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Remind.__init__() missing 2 required positional arguments: 'start_date' and 'mention_role'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 856, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'new_remind' raised an exception: TypeError: Remind.__init__() missing 2 required positional arguments: 'start_date' and 'mention_role'
+[14/03/2023 09:55:04] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 09:55:04] [INFO    ] discord.client: logging in using static token
+[14/03/2023 09:59:05] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 09:59:05] [INFO    ] discord.client: logging in using static token
+[14/03/2023 09:59:09] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 311a6eac1bd116686a5612816ee500af).
+[14/03/2023 09:59:52] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'new_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 46, in _set_remind
+    self.reminders.add_remind(reminder)
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 82, in add_remind
+    self.db.insert(remind.to_dict())
+                   ^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 59, in to_dict
+    "mention_role" : self.mention_role.id
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'new_remind' raised an exception: AttributeError: 'NoneType' object has no attribute 'id'
+[14/03/2023 10:03:13] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:03:13] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:03:18] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d18fc470f2047881b397566c4001c534).
+[14/03/2023 10:03:22] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'new_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 46, in _set_remind
+    self.reminders.add_remind(reminder)
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 87, in add_remind
+    self.db.insert(remind.to_dict())
+                   ^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 64, in to_dict
+    "mention_role" : self.mention_role.id
+                     ^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'new_remind' raised an exception: AttributeError: 'NoneType' object has no attribute 'id'
+[14/03/2023 10:04:01] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:04:01] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:04:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 46b9016f40d3689f72a06b5f804f8a4c).
+[14/03/2023 10:04:52] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'list_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 54, in _list_remind
+    list_remind = await self.reminders.get_list_remind_from_user(userID)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 119, in get_list_remind_from_user
+    if i.get_userID() == userID:
+       ^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 19, in get_userID
+    return self.user.id
+           ^^^^^^^^^
+AttributeError: 'Remind' object has no attribute 'user'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'list_remind' raised an exception: AttributeError: 'Remind' object has no attribute 'user'
+[14/03/2023 10:05:46] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:05:46] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:05:51] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6c1b3108fa6d623e94bbccb1bd4afeda).
+[14/03/2023 10:05:58] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'list_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 54, in _list_remind
+    list_remind = await self.reminders.get_list_remind_from_user(userID)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 119, in get_list_remind_from_user
+    if i.get_userID() == userID:
+       ^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 19, in get_userID
+    return self.owned_user.id
+           ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Int64' object has no attribute 'id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'list_remind' raised an exception: AttributeError: 'Int64' object has no attribute 'id'
+[14/03/2023 10:10:11] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:10:11] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:10:16] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e81c16d7cafb9d6e6535ffcf2ac0a1d2).
+[14/03/2023 10:10:24] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'list_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 54, in _list_remind
+    list_remind = await self.reminders.get_list_remind_from_user(userID)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 120, in get_list_remind_from_user
+    if i.get_userID() == userID:
+       ^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 20, in get_userID
+    return self.owned_user.id
+           ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Int64' object has no attribute 'id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'list_remind' raised an exception: AttributeError: 'Int64' object has no attribute 'id'
+[14/03/2023 10:11:04] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:11:04] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:11:09] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: bb2dbc9c4936e0d486d1409c4e151a53).
+[14/03/2023 10:13:31] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'edit_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 77, in edit_remind
+    if self.reminders.edit_remind(userID, remind_id, content, end_date, time, start_date, mention_who):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 97, in edit_remind
+    self.db.update(i.to_dict())
+                   ^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 59, in to_dict
+    "owned_user" : self.owned_user.id,
+                   ^^^^^^^^^^^^^^^^^^
+AttributeError: 'Int64' object has no attribute 'id'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'edit_remind' raised an exception: AttributeError: 'Int64' object has no attribute 'id'
+[14/03/2023 10:16:01] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:16:01] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:16:06] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 85416a68b48c01b195d943d4575b1296).
+[14/03/2023 10:16:11] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'edit_remind'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\cogs\jobs\reminder.py", line 77, in edit_remind
+    if self.reminders.edit_remind(userID, remind_id, content, end_date, time, start_date, mention_who.id):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\remind.py", line 97, in edit_remind
+    self.db.update(i.to_dict())
+  File "C:\Users\tungnd\Desktop\discord_bot\ultils\db_action.py", line 39, in update
+    self.collection.update_one(key)
+TypeError: Collection.update_one() missing 1 required positional argument: 'update'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 856, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'edit_remind' raised an exception: TypeError: Collection.update_one() missing 1 required positional argument: 'update'
+[14/03/2023 10:20:49] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[14/03/2023 10:20:49] [INFO    ] discord.client: logging in using static token
+[14/03/2023 10:20:54] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6b2ed59a9ad3d6a0529ce6aad9c01b9e).

@@ -3,7 +3,7 @@ from discord import Embed
 
 class Remind:
     def __init__(self, remindID, user, content, 
-                        end_date, time, start_date, mention_role):
+                        end_date, time, start_date, mention_role, guildID):
         self.remindID = remindID
         self.owned_user = user
         self.content = content
@@ -11,12 +11,21 @@ class Remind:
         self.end_date = end_date
         self.start_date = start_date
         self.mention_role = mention_role
+        self.guildID = guildID
     
     def get_remindID(self):
         return self.remindID
     
     def get_userID(self):
-        return self.user.id
+        return self.owned_user
+    
+    def get_mention(self):
+        if self.mention_role:
+            return self.mention_role
+        return 0
+    
+    def get_guildID(self):
+        return self.guildID
     
     def set_new_time(self, new_time):
         if new_time != "":
@@ -49,13 +58,15 @@ class Remind:
     
     def to_dict(self):
         return {
+            "index_num" : 1,
+            "guildID" : self.get_guildID(),
             "remindID" : self.remindID,
-            "owned_user" : self.owned_user.id,
+            "owned_user" : self.owned_user,
             "content" : self.content,
             "time" : self.time,
             "end_date" : self.end_date,
             "start_date" : self.start_date,
-            "mention_role" : self.mention_role.id
+            "mention_role" : self.get_mention()
         }
     
 class ManageReminder:
@@ -66,13 +77,15 @@ class ManageReminder:
         self.load_reminder()
         
     def load_reminder(self):
-        data = self.db.get_all()
-        for i in data:
-            reminder = Remind(
-                            i["remindID"], i["owned_user"], i["content"], 
-                            i["end_date"], i["time"], i["start_date"], i["mention_role"]
-                            )
-            self.list_remind.append(reminder)
+        data = self.db.get_all({"index_num" : 1})
+        print(data)
+        if data:
+            for i in data:
+                reminder = Remind(
+                                i["remindID"], i["owned_user"], i["content"], 
+                                i["end_date"], i["time"], i["start_date"], i["mention_role"]
+                                )
+                self.list_remind.append(reminder)
             
     def add_remind(self, remind):
         self.list_remind.append(remind)
@@ -86,16 +99,23 @@ class ManageReminder:
                 i.set_new_time(time)
                 i.set_new_start_date(start_date)
                 i.set_new_mention_role(mention_who)
-                self.db.update(i.to_dict())
+                self.db.update({"remindID" : remind_id} , {"$set" : i.to_dict()})
                 return True
         return False
         
-    async def remove_remind(self, userID, remindID):
+    async def remove_remind(self, userID, remindID, index = -1):
+        if index != -1:
+            self.list_remind.pop(index)
+            self.db.remove({"remindID" : remindID})
+            return True
+        
+        index = 0
         for i in self.list_remind:
             if i.get_remindID() == remindID and i.get_userID() == userID:
-                self.list_remind.remove(i)
+                self.list_remind.pop(index)
                 self.db.remove({"remindID" : remindID})
                 return True
+            index += 1
         return False
     
     async def get_list_remind_from_user(self, userID):
@@ -106,10 +126,12 @@ class ManageReminder:
         return list_remind
     
     async def check_list(self):
+        index = 0
         for i in self.list_remind:
             if i.get_end_date() == datetime.now().strftime("%d/%m/%Y") and i.get_time() >= datetime.now().strftime("%H:%M"):
-                self.remove_reminder(i.get_remindID())
-                yield i.send_embed()
+                self.remove_remind(-1, i.get_remindID(), index)
+                yield (i.get_guildID(), i.send_embed())
+            index += 1
     
     async def check_remind(self, remindID):
         for i in self.list_remind:
