@@ -57,7 +57,7 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         del db
         
         embed = Embed(title = self.title_.value, description = self.content.value, color = 0x00ff00)
-        embed.add_field(name = "Ngày nhắc nhở", value = self.end_date.value + " " + self.end_time.value + f" <t:{timestmap}:R>")
+        embed.add_field(name = "Ngày nhắc nhở", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestmap}:R>")
         embed.set_author(name = f"Remind ID: {remind_id}")
         embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
         

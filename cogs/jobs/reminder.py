@@ -131,6 +131,24 @@ class Reminder(commands.GroupCog, name = "remind"):
         modal = NewRemind(mention_who)
         await interaction.response.send_modal(modal)
         
+    @app_commands.command(name = "get_remind_id", description = "Lấy lịch nhắc từ ID")
+    async def _get_remind_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999]):
+        remind = self.db.find({"remind_id" : remind_id, "user_id" : interaction.user.id})
+        if remind:
+            embed = Embed(title = remind["title"], description = remind["content"], color = 0x00ff00)
+            embed.add_field(name = "Ngày nhắc nhở", value = remind["end_date"] + " " + remind["end_time"] + f"\n<t:{remind['timestamp']}:R>")
+            embed.set_author(name = f"Remind ID: {remind['remind_id']}")
+            
+            user = ""
+            for user_id in remind["mention_id"]:
+                user += f"<@{user_id}> "
+            embed.add_field(name = "Người được nhắc", value = user)
+            
+            await interaction.response.send_message(embed = embed, ephemeral = True)
+        
+        else:
+            await interaction.response.send_message(f"Không tìm thấy lịch nhắc có ID {remind_id}", ephemeral = True)
+        
     @app_commands.command(name = "list_remind", description = "Xem danh sách lịch nhắc của bạn")
     async def _list_remind(self, interaction : Interaction):
         query = { "user_id" : interaction.user.id}
@@ -183,7 +201,7 @@ class Reminder(commands.GroupCog, name = "remind"):
             data["end_time"] = end_time
             
         if mention_who is not None:
-            data["mention_who"] = mention_who.id
+            data["mention_id"] = [mention_who.id, interaction.user.id]
             
         result = self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
         if result.modified_count != 0:
