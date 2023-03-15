@@ -12,6 +12,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         self.bot = bot
         self.db = Database("reminder")
         self.reminders = ManageReminder(self.db)
+        self.check_remind.start()
 
     def default_channel(self, guild_id, channel_id):
         data = {
@@ -37,12 +38,18 @@ class Reminder(commands.GroupCog, name = "remind"):
                       end_date : str, time : Optional[str] = "", start_date : Optional[str] = "", 
                       mention_who : Optional[Member] = None):
         
-        if not self.db.find({"guild_id" : interaction.guild.id}):
-            self.default_channel(interaction.guild.id, interaction.channel.id)
+        guild_id = interaction.guild.id
+        if not self.db.find({"guild_id" : guild_id}):
+            self.default_channel(guild_id, interaction.channel.id)
 
         remind_id = randint(0, 2**16)
         user = interaction.user.id
-        reminder = Remind(remind_id, user, content, end_date, time, start_date, mention_who.id, guild_id)
+        if mention_who is None:
+            mention_who = 0
+        else:
+            mention_who = mention_who.id
+            
+        reminder = Remind(remind_id, user, content, end_date, time, start_date, mention_who, guild_id)
         self.reminders.add_remind(reminder)
         await interaction.response.send_message(embed = reminder.send_embed(), ephemeral = True)
         
@@ -82,14 +89,25 @@ class Reminder(commands.GroupCog, name = "remind"):
     @tasks.loop(seconds = 60)
     async def check_remind(self):
         cache = {}
-        async for i in await self.reminders.check_list():
+        get_list = await self.reminders.check_list()
+        
+        for i in get_list:
             guildID = i[0]
             if guildID not in cache:
                 default_channel_id = self.db.find({"index_num" : 0, "guild_id" : guildID})
                 channel = self.bot.get_channel(default_channel_id)
                 cache[guildID] = channel
+            
+            if i[2] != 0:
+                member = self.bot.get_user(i[2])
+                await cache[guildID].send(f"{member.mention}", embed = i[1])
+            else:
+                await cache[guildID].send(embed = i[1])
+        print("oke")
 
-            await cache[guildID].send(embed = i[1])
-
+    @check_remind.before_loop
+    async def before_check_remind(self):
+        await self.bot.wait_until_ready()
+        
 async def setup(bot : commands.Bot):
     await bot.add_cog(Reminder(bot))

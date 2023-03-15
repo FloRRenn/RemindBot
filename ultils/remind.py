@@ -27,6 +27,12 @@ class Remind:
     def get_guildID(self):
         return self.guildID
     
+    def get_end_date(self):
+        return self.end_date
+    
+    def get_time(self):
+        return self.time
+    
     def set_new_time(self, new_time):
         if new_time != "":
             self.time = new_time
@@ -83,7 +89,8 @@ class ManageReminder:
             for i in data:
                 reminder = Remind(
                                 i["remindID"], i["owned_user"], i["content"], 
-                                i["end_date"], i["time"], i["start_date"], i["mention_role"]
+                                i["end_date"], i["time"], i["start_date"], i["mention_role"],
+                                i["guildID"]
                                 )
                 self.list_remind.append(reminder)
             
@@ -126,14 +133,19 @@ class ManageReminder:
         return list_remind
     
     async def check_list(self):
-        index = 0
-        for i in self.list_remind:
-            if i.get_end_date() == datetime.now().strftime("%d/%m/%Y") and i.get_time() >= datetime.now().strftime("%H:%M"):
-                self.remove_remind(-1, i.get_remindID(), index)
-                yield (i.get_guildID(), i.send_embed())
-            index += 1
+        return []
+        # index = 0
+        # notify = []
+        
+        # for i in self.list_remind:
+        #     if i.get_end_date() == datetime.now().strftime("%d/%m/%Y") and i.get_time() >= datetime.now().strftime("%H:%M"):
+        #         self.remove_remind(-1, i.get_remindID(), index)
+        #         notify.append(i.get_guildID(), i.send_embed(), i.get_mention())
+        #     index += 1
+            
+        # return notify
     
-    async def check_remind(self, remindID):
+    def check_remind(self, remindID):
         for i in self.list_remind:
             if i.get_remindID() == remindID:
                 return i.send_embed()
