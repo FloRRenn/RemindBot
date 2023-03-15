@@ -29,5 +29,5 @@ class Database:
         return self.collection.delete_one(key)
         
     def update(self, *args, **kwargs):
-        self.collection.update_one(*args, **kwargs)
+        return self.collection.update_one(*args, **kwargs)
     

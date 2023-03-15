@@ -1,6 +1,11 @@
 from datetime import timedelta
 from re import findall, match
 
+pattern = {
+    "date_pattern" : r'^(?:(?:31\/(?:0?[13578]|1[02]))|(?:(?:29|30)\/(?:0?[1,3-9]|1[0-2]))|(?:0?[1-9]|1\d|2[0-8])\/(?:0?[1-9]|1[0-2]))\/(?:19|20)\d{2}$|^(?:29\/0?2\/(?:19|20)(?:(?:[02468][048])|(?:[13579][26])))$',
+    "time_pattern" : r'^([01]\d|2[0-3]):([0-5]\d)$'
+}
+
 def timedelta_format(days: int, hours : int, minutes : int, seconds : int):
     return timedelta(days = days, hours = hours, minutes = minutes, seconds = seconds)
 
@@ -26,8 +31,8 @@ def covert_str_to_seconds(str_time : str):
     
     return round(float(number[0]) * time_units[unit])
 
-def is_valid_with_pattern(pattern, time_string):
-    if match(pattern, time_string):
+def is_valid_with_pattern(time_string, pattern_type):
+    if match(pattern[pattern_type], time_string):
         return True
     return False
 

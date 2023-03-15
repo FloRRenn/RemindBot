@@ -5,15 +5,15 @@ from typing import Optional
 from random import randint
 
 from ultils.db_action import Database
-from ultils.remind import ManageReminder, Remind
-from ultils.panels import NewRemind
+from ultils.remind import ManageReminder
+from ultils.panels import NewRemind, is_valid_with_pattern, datetime
 
 class Reminder(commands.GroupCog, name = "remind"):
     def __init__(self, bot : commands.Bot):
         self.bot = bot
         self.db = Database("reminder")
-        self.reminders = ManageReminder(self.db)
-        #self.check_remind.start()
+        # self.reminders = ManageReminder(self.db)
+        # self.check_remind.start()
 
     # def default_channel(self, guild_id, channel_id):
     #     data = {
@@ -123,8 +123,12 @@ class Reminder(commands.GroupCog, name = "remind"):
         await interaction.response.send_message(f"Đã thiết lập kênh mặc định là {channel.mention}", ephemeral = True)
         
     @app_commands.command(name = "new", description = "Tạo nhắc nhở mới")
-    async def _set_remind(self, interaction : Interaction):
-        modal = NewRemind()
+    async def _set_remind(self, interaction : Interaction, mention_who : Optional[Member] = None):
+        mention_id = [interaction.user.id]
+        if mention_who:
+            mention_id.append(mention_who.id)
+            
+        modal = NewRemind(mention_who)
         await interaction.response.send_modal(modal)
         
     @app_commands.command(name = "list_remind", description = "Xem danh sách lịch nhắc của bạn")
@@ -143,7 +147,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         await interaction.response.send_message("**Bạn không có lịch nhắc nào**", ephemeral = True)
         
     @app_commands.command(name = "delete_from_id", description = "Xóa lịch nhắc của bạn")
-    async def _delete_from_id(self, interaction : Interaction, remind_id : int):
+    async def _delete_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999]):
         query = { "user_id" : interaction.user.id, "remind_id" : remind_id}
         result = self.db.remove(query)
         
@@ -151,6 +155,41 @@ class Reminder(commands.GroupCog, name = "remind"):
             await interaction.response.send_message("**Đã xóa thành công**", ephemeral = True)
         else:
             await interaction.response.send_message("**Không tìm thấy lịch nhắc**", ephemeral = True)
+            
+    @app_commands.command(name = "edit_from_id", description = "Sửa lịch nhắc của bạn")
+    async def _edit_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999],
+                            title : Optional[str] = "", content : Optional[str] = "", 
+                            end_date : Optional[str] = "", end_time : Optional[str] = "",
+                            mention_who : Optional[Member] = None):
+        data = {"remind_id" : remind_id}
+        
+        if title != "":
+            data["title"] = title
+            
+        if content != "":
+            data["content"] = content
+            
+        if end_date != "":
+            end_date_ = datetime.strptime(end_date, "%d/%m/%Y").date()
+            now = datetime.now().date()
+            
+            if not is_valid_with_pattern(end_date, "date_pattern") or end_date_ < now:
+                return await interaction.response.send_message("**Ngày không hợp lệ**", ephemeral = True)
+            data["end_date"] = end_date
+            
+        if end_time != "":
+            if not is_valid_with_pattern(end_time, "time_pattern"):
+                return await interaction.response.send_message("**Thời gian không hợp lệ**", ephemeral = True)
+            data["end_time"] = end_time
+            
+        if mention_who is not None:
+            data["mention_who"] = mention_who.id
+            
+        result = self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
+        if result.modified_count != 0:
+            await interaction.response.send_message("**Đã sửa thành công**", ephemeral = True)
+        else:
+            await interaction.response.send_message(f"**Không tìm thấy lịch nhắc có id {remind_id}**", ephemeral = True)
         
 async def setup(bot : commands.Bot):
     await bot.add_cog(Reminder(bot))
