@@ -12,8 +12,8 @@ def convert_to_timestamp(datetime_string):
 class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
     title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", max_length = 100, min_length = 1, style = TextStyle.short, required = True)
     content = ui.TextInput(label = "Nội dung", placeholder = "Nhập nội dung", min_length = 5, style = TextStyle.short, required = False)
-    end_date = ui.TextInput(label = "Ngày nhắc nhở", placeholder = f"Nhập ngày nhắc nhở", default = datetime.now().strftime("%d/%m/%Y"), min_length = 8, max_length = 10, style = TextStyle.short, required = True)
-    end_time = ui.TextInput(label = "Thời gian nhắc nhở", placeholder = "Nhập thời gian nhắc nhở", default = datetime.now().strftime("%H:%M"), min_length = 3, max_length = 5, style = TextStyle.short, required = True)
+    end_date = ui.TextInput(label = "Ngày nhắc nhở (dd/mm/yyyy)", placeholder = f"Nhập ngày nhắc nhở", min_length = 8, max_length = 10, style = TextStyle.short, required = True)
+    end_time = ui.TextInput(label = "Thời gian nhắc nhở (hh:mm)", placeholder = "Nhập thời gian nhắc nhở", default = datetime.now().strftime("%H:%M"), min_length = 3, max_length = 5, style = TextStyle.short, required = True)
     
     def __init__(self, user_mention : int) -> None:
         super().__init__()

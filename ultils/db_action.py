@@ -16,11 +16,11 @@ class Database:
     def insert(self, key):
         self.collection.insert_one(key)
         
-    def get_all(self, arg):
-        return self.collection.find(arg)
+    def get_all(self, *args, **kwargs):
+        return self.collection.find(*args, **kwargs)
         
-    def find(self, key):
-        find = self.collection.find_one(key)
+    def find(self, *args, **kwargs):
+        find = self.collection.find_one(*args, **kwargs)
         if not find:
             return None
         return find
