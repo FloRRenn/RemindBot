@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from os import getenv
 from discord import app_commands, Interaction
 
-def is_botOnwer():
+def is_botOwner():
     def checkUser(interaction : Interaction):
         load_dotenv()
 
