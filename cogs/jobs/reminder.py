@@ -6,7 +6,7 @@ from random import randint
 
 from ultils.db_action import Database
 from ultils.remind import ManageReminder
-from ultils.panels import NewRemind, is_valid_with_pattern, datetime
+from ultils.panels import NewRemind, is_valid_with_pattern, datetime, convert_to_timestamp
 
 class Reminder(commands.GroupCog, name = "remind"):
     def __init__(self, bot : commands.Bot):
@@ -179,7 +179,12 @@ class Reminder(commands.GroupCog, name = "remind"):
                             title : Optional[str] = "", content : Optional[str] = "", 
                             end_date : Optional[str] = "", end_time : Optional[str] = "",
                             mention_who : Optional[Member] = None):
-        data = {"remind_id" : remind_id}
+        
+        
+        data = {"remind_id" : remind_id, "user_id" : interaction.user.id}
+        remind_data = self.db.find(data)
+        if not remind_data:
+            return await interaction.response.send_message(f"**Không tìm thấy lịch nhắc có id {remind_id}**", ephemeral = True)
         
         if title != "":
             data["title"] = title
@@ -190,24 +195,28 @@ class Reminder(commands.GroupCog, name = "remind"):
         if end_date != "":
             end_date_ = datetime.strptime(end_date, "%d/%m/%Y").date()
             now = datetime.now().date()
-            
             if not is_valid_with_pattern(end_date, "date_pattern") or end_date_ < now:
                 return await interaction.response.send_message("**Ngày không hợp lệ**", ephemeral = True)
             data["end_date"] = end_date
+        else:
+            data["end_date"] = remind_data["end_date"]
             
         if end_time != "":
             if not is_valid_with_pattern(end_time, "time_pattern"):
                 return await interaction.response.send_message("**Thời gian không hợp lệ**", ephemeral = True)
             data["end_time"] = end_time
+        else:
+            data["end_time"] = remind_data["end_time"]
             
         if mention_who is not None:
             data["mention_id"] = [mention_who.id, interaction.user.id]
+        
+        data["timestamp"] = convert_to_timestamp(data["end_date"] + " " + data["end_time"], "%d/%m/%Y %H:%M")
+        
+        self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
+        await interaction.response.send_message("**Đã sửa thành công**", ephemeral = True)
+
             
-        result = self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
-        if result.modified_count != 0:
-            await interaction.response.send_message("**Đã sửa thành công**", ephemeral = True)
-        else:
-            await interaction.response.send_message(f"**Không tìm thấy lịch nhắc có id {remind_id}**", ephemeral = True)
         
 async def setup(bot : commands.Bot):
     await bot.add_cog(Reminder(bot))
