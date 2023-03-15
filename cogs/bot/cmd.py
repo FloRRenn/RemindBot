@@ -13,7 +13,7 @@ class ManangeCOG(commands.GroupCog, name = "cog"):
         self.bot = bot
         
     @app_commands.command(name = "load", description = "Load Cog's name")
-    @app_commands.check(is_botOnwer)
+    @is_botOnwer()
     async def _load_cog(self, interaction : Interaction, name : str):
         await interaction.response.send_message(f"Loading cog **{name}**...")
         try:
@@ -29,7 +29,7 @@ class ManangeCOG(commands.GroupCog, name = "cog"):
             await interaction.edit_original_response(content = f"Cog **{name}**... \n**LOAD THẤT BẠI:** `Xảy ra lỗi khi load. Xem log để biết thêm chi tiết.`")
         
     @app_commands.command(name = "reload", description = "Reload Cog's name")
-    @app_commands.check(is_botOnwer)
+    @is_botOnwer()
     async def _reload_cog(self, interaction : Interaction, name : str):
         await interaction.response.send_message(f"Reloading cog **{name}**...")
         try:
@@ -43,7 +43,7 @@ class ManangeCOG(commands.GroupCog, name = "cog"):
             await interaction.edit_original_response(content = f"Cog **{name}**... \n**RELOAD THẤT BẠI:** `Không thể load Cog này`")
             
     @app_commands.command(name = "stop", description = "Stop Cog's name")
-    @app_commands.check(is_botOnwer)
+    @is_botOnwer()
     async def _disable_cog(self, interaction : Interaction, name : str):
         await interaction.response.send_message(f"Stopping cog **{name}**...")
         
@@ -75,12 +75,12 @@ class ManangeCMD(commands.GroupCog, name = "cmd"):
         await interaction.response.send_message(f"{message_type[type]} **{cmd_name}**")
     
     @app_commands.command(name = "enable", description = "Enable command's name")
-    @app_commands.check(is_botOnwer)
+    @is_botOnwer()
     async def _enable(self, interaction : Interaction, name : str):
         await self.cmd_config(name, "Enable", interaction)
     
     @app_commands.command(name = "disable", description = "Disable command's name")
-    @app_commands.check(is_botOnwer)
+    @is_botOnwer()
     async def _disable(self, interaction : Interaction, name : str):
         await self.cmd_config(name, "Disable", interaction)
         

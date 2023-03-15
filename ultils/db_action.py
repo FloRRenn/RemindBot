@@ -12,11 +12,6 @@ db = cluster["discordDB"]
 class Database:
     def __init__(self, collection_name):
         self.collection = db[collection_name]
-    
-    # async def connect(self):
-    #     client = motor.motor_asyncio.AsyncIOMotorClient(self.CONNECTION_STRING)
-    #     cluster = client['discordDB']
-    #     self.db = cluster[self.collection]
         
     def insert(self, key):
         self.collection.insert_one(key)
@@ -25,18 +20,13 @@ class Database:
         return self.collection.find(arg)
         
     def find(self, key):
-        find = self.collection.find(key)
+        find = self.collection.find_one(key)
         if not find:
             return None
-        
-        for i in find:
-            return pprint.pformat(i)
+        return find
         
     def remove(self, key):
         self.collection.delete_one(key)
         
     def update(self, source, key):
         self.collection.update_one(source, key)
-
-
-        

@@ -95,7 +95,7 @@ class Reminder(commands.GroupCog, name = "remind"):
             guildID = i[0]
             if guildID not in cache:
                 default_channel_id = self.db.find({"index_num" : 0, "guild_id" : guildID})
-                channel = self.bot.get_channel(default_channel_id)
+                channel = self.bot.get_channel(default_channel_id["default_channel"])
                 cache[guildID] = channel
             
             if i[2] != 0:

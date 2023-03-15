@@ -572,3 +572,73 @@ discord.app_commands.errors.CommandInvokeError: Command 'edit_remind' raised an 
 [14/03/2023 10:20:49] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
 [14/03/2023 10:20:49] [INFO    ] discord.client: logging in using static token
 [14/03/2023 10:20:54] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 6b2ed59a9ad3d6a0529ce6aad9c01b9e).
+[15/03/2023 09:55:11] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 09:55:11] [INFO    ] discord.client: logging in using static token
+[15/03/2023 09:57:34] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 09:57:34] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:05:14] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 10:05:14] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:05:19] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 3c0e67516f56f68173a42e8ed5cc519b).
+[15/03/2023 10:07:04] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'ask'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\RemindBot\cogs\jobs\chatbot.py", line 35, in _ask
+    await interaction.response.send_message("Have sleeped in 60 seconds")
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\interactions.py", line 778, in send_message
+    await adapter.create_interaction_response(
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\webhook\async_.py", line 219, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10062): Unknown interaction
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'ask' raised an exception: NotFound: 404 Not Found (error code: 10062): Unknown interaction
+[15/03/2023 10:11:50] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 10:11:50] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:11:55] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: e93290821b812019fe13a302aaaf4fdf).
+[15/03/2023 10:13:05] [ERROR   ] discord.app_commands.tree: Ignoring exception in command 'ask'
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 841, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\RemindBot\cogs\jobs\chatbot.py", line 40, in _ask
+    await interaction.response.send_message("Have sleeped in 60 seconds")
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\interactions.py", line 778, in send_message
+    await adapter.create_interaction_response(
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\webhook\async_.py", line 219, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10062): Unknown interaction
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\tree.py", line 1248, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 867, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\tungnd\Desktop\discord_bot\env\Lib\site-packages\discord\app_commands\commands.py", line 860, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'ask' raised an exception: NotFound: 404 Not Found (error code: 10062): Unknown interaction
+[15/03/2023 10:14:51] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 10:14:51] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:14:56] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 70a047f7b924caaaab5b2bc9fff1a905).
+[15/03/2023 10:17:09] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 10:17:09] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:17:13] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: c7cbc24551366578e7164abfd104889b).
+[15/03/2023 10:27:42] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 10:27:42] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:27:47] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: d9429f0ab89b771131461c7974105823).
+[15/03/2023 10:34:33] [WARNING ] discord.client: PyNaCl is not installed, voice will NOT be supported
+[15/03/2023 10:34:33] [INFO    ] discord.client: logging in using static token
+[15/03/2023 10:34:37] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: 22edd1e8632c3e4625e97272fb470808).
