@@ -1,9 +1,13 @@
-import pymongo
+import re
 
-myclient = pymongo.MongoClient("mongodb+srv://florren:superMAN@cluster0.6lt2j1x.mongodb.net/test")
-mydb = myclient["discordDB"]
-mycol = mydb["rooms"]
+time_pattern = r'^([01]\d|2[0-3]):([0-5]\d)$'
 
-mydict = { "name": "John", "address": "Highway 37" }
+def is_valid_time(time_string):
+    if re.match(time_pattern, time_string):
+        return True
+    else:
+        return False
 
-x = mycol.insert_one(mydict)
+
+if __name__ == "__main__":
+    print(is_valid_time("-12:12"))

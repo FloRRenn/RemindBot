@@ -84,7 +84,6 @@ class ManageReminder:
         
     def load_reminder(self):
         data = self.db.get_all({"index_num" : 1})
-        print(data)
         if data:
             for i in data:
                 reminder = Remind(

@@ -26,7 +26,8 @@ class Database:
         return find
         
     def remove(self, key):
-        self.collection.delete_one(key)
+        return self.collection.delete_one(key)
         
-    def update(self, source, key):
-        self.collection.update_one(source, key)
+    def update(self, *args, **kwargs):
+        self.collection.update_one(*args, **kwargs)
+    

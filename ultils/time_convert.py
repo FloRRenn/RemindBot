@@ -1,5 +1,5 @@
 from datetime import timedelta
-from re import findall
+from re import findall, match
 
 def timedelta_format(days: int, hours : int, minutes : int, seconds : int):
     return timedelta(days = days, hours = hours, minutes = minutes, seconds = seconds)
@@ -25,6 +25,16 @@ def covert_str_to_seconds(str_time : str):
         return None
     
     return round(float(number[0]) * time_units[unit])
+
+def is_valid_with_pattern(pattern, time_string):
+    if match(pattern, time_string):
+        return True
+    return False
+
+def date_is_less_than_(start_date, end_date):
+    if end_date < start_date:
+        return True
+    return False
 
 if __name__ == "__main__":
     seconds = 1000
