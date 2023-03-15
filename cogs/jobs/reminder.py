@@ -142,6 +142,15 @@ class Reminder(commands.GroupCog, name = "remind"):
         
         await interaction.response.send_message("**Bạn không có lịch nhắc nào**", ephemeral = True)
         
-    
+    @app_commands.command(name = "delete_from_id", description = "Xóa lịch nhắc của bạn")
+    async def _delete_from_id(self, interaction : Interaction, remind_id : int):
+        query = { "user_id" : interaction.user.id, "remind_id" : remind_id}
+        result = self.db.remove(query)
+        
+        if result.deleted_count != 0:
+            await interaction.response.send_message("**Đã xóa thành công**", ephemeral = True)
+        else:
+            await interaction.response.send_message("**Không tìm thấy lịch nhắc**", ephemeral = True)
+        
 async def setup(bot : commands.Bot):
     await bot.add_cog(Reminder(bot))
