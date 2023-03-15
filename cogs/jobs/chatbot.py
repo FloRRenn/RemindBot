@@ -7,8 +7,9 @@ from ultils.chatgpt import ChatGPT
 from ultils.db_action import Database
 from ultils.permission import is_botOwner
 
-is_not_answering = False
-def check_it_is_answering(self, interaction : Interaction):
+is_not_answering = True
+def check_it_is_answering(interaction : Interaction):
+    global is_not_answering
     return is_not_answering
 
 class ChatBot(commands.GroupCog, name = "chatbot"):
@@ -44,6 +45,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
 
         answer = await self.chatbot.ask(question)
 
+        is_not_answering = True
         if len(answer) < 2000:
             return await interaction.followup.send(answer)
         
@@ -51,10 +53,10 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         with open(filename, "w+", encoding = "utf-8") as f:
             f.write(answer)
         file = File(filename)
+        
         await interaction.followup.send("**Bởi vì câu trả lời quá dài nên tôi sẽ gửi chúng dưới dạng file**", file = file)
 
         os.remove(filename)
-        is_not_answering = True
 
     @app_commands.command(name = "reset_chat", description = "Xóa thông tin về cuộc trò chuyện cũ")
     @app_commands.check(check_it_is_answering)
@@ -69,7 +71,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     @_reset_chat.error
     @_ask.error
     async def wait_for_next_chat(self, interaction : Interaction, error):
-        await interaction.response.send_message("Bot hiện tại đang trả lời câu hỏi của user. Vui lòng thực hiện lại sau khi bot đã trả lời xong.", ephemeral = False)
+        await interaction.response.send_message("Bot hiện tại đang trả lời câu hỏi của user. Vui lòng thực hiện lại sau khi bot đã trả lời xong.", ephemeral = True)
 
 async def setup(bot : commands.Bot):
     await bot.add_cog(ChatBot(bot))
