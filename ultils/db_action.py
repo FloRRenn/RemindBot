@@ -13,6 +13,9 @@ class Database:
     def __init__(self, collection_name):
         self.collection = db[collection_name]
         
+    def count(self, *args, **kwargs):
+        return self.collection.count_documents(*args, **kwargs)
+        
     def insert(self, key):
         self.collection.insert_one(key)
         

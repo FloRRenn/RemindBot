@@ -130,22 +130,27 @@ class Reminder(commands.GroupCog, name = "remind"):
         
     @tasks.loop(minutes = 2)
     async def remind_checker(self):
-        reminds_list = self.db.get_all({"type" : "reminder"})
-        timestmap = datetime.now().timestamp()
+        query = {"type" : "reminder"}
+        reminds_list = self.db.get_all(query)
+        documents_count = self.db.count(query)
         
-        for remind in reminds_list:
-            if timestmap >= remind["timestamp"]:
-                self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
-                
-                user = ""
-                for user_id in remind["mention_id"]:
-                    user += f"<@{user_id}> "
-                
-                embed = Embed(title = remind["title"], description = remind["content"], color = 0x00ff00)
-                embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
-                
-                await self.bot.get_channel(self.guild_cache[remind["guild_id"]]).send(user, embed = embed)
-            timestmap += 15
+        if documents_count != 0:
+            alignment = 120 // documents_count
+            timestmap = datetime.now().timestamp()
+            
+            for remind in reminds_list:
+                if timestmap >= remind["timestamp"]:
+                    self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
+                    
+                    user = ""
+                    for user_id in remind["mention_id"]:
+                        user += f"<@{user_id}> "
+                    
+                    embed = Embed(title = remind["title"], description = remind["content"], color = 0x00ff00)
+                    embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
+                    
+                    await self.bot.get_channel(self.guild_cache[remind["guild_id"]]).send(user, embed = embed)
+                timestmap += alignment
                 
     @remind_checker.before_loop
     async def before_remind_checker(self):
