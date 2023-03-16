@@ -115,6 +115,25 @@ class ChatGPT:
                 
         self.add_new_conversation(answer, response_role, convo_id = convo_id)
         return answer
+    
+    def save_chat(self, filename: str, convo_id: str = "default"):
+        data = self.conversation[convo_id]
+        if len(data) < 2:
+            return False
+        
+        with open(filename, "w+", encoding = "utf-8") as f:
+            f.write(f"Nội dung chat:\n")
+            f.write("========================================\n\n")
+            
+            for conver in data:
+                if conver["role"] == "system" or conver["role"] == "assistant":
+                    who = "## Bot:\n"
+                else:
+                    who = f"## You:\n"
+                
+                f.write(who)
+                f.write(f"{conver['content']}\n<br/><br/> \n\n")
+        return True
 
     def rollback(self, n: int = 1, convo_id: str = "default"):
         for _ in range(n):

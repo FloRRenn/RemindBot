@@ -58,6 +58,19 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         await interaction.followup.send("**Bởi vì câu trả lời quá dài nên tôi sẽ gửi chúng dưới dạng file**", file = file)
 
         os.remove(filename)
+        
+    @app_commands.command(name = "save_current_chat", description = "Lưu lại cuộc trò chuyện hiện tại")
+    @app_commands.check(check_it_is_answering)
+    async def _save_current_chat(self, interaction : Interaction):
+        filename = f"chat-with-user-{interaction.user.id}.md"
+        res = self.chatbot.save_chat(filename)
+        if not res:
+            return await interaction.response.send_message("Không có cuộc trò chuyện nào để lưu", ephemeral = True)
+
+        file = File(filename)        
+        await interaction.response.send_message("**Đây là cuộc trò chuyện hiện tại của bạn**", file = file)
+
+        os.remove(filename)
 
     @app_commands.command(name = "reset_chat", description = "Xóa thông tin về cuộc trò chuyện cũ")
     @app_commands.check(check_it_is_answering)
@@ -71,6 +84,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
 
     @_reset_chat.error
     @_ask.error
+    @_save_current_chat.error
     async def wait_for_next_chat(self, interaction : Interaction, error):
         await interaction.response.send_message("Bot hiện tại đang trả lời câu hỏi của user. Vui lòng thực hiện lại sau khi bot đã trả lời xong.", ephemeral = True)
 
