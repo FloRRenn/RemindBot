@@ -15,7 +15,7 @@ class Bot(commands.Bot):
         # cogs = ["bot.about", "bot.cmd",
         #         "server.channel", "server.delete", "server.moderate",
         #          "jobs.reminder","jobs.chatbot","server.server"]
-        cogs = ["jobs.reminder"]
+        cogs = ["jobs.votes"]
         
         for cog in cogs:
             await self.load_extension(f"cogs.{cog}")

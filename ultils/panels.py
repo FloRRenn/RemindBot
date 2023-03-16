@@ -1,4 +1,4 @@
-from discord import ui, TextStyle, Interaction, Embed
+from discord import ui, TextStyle, Interaction, Embed, TextChannel
 from datetime import datetime
 from ultils.time_convert import is_valid_with_pattern
 from ultils.db_action import Database
@@ -11,7 +11,7 @@ def convert_to_timestamp(datetime_string):
 
 class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
     title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 5, max_length = 100, style = TextStyle.short, required = True)
-    content = ui.TextInput(label = "Nội dung", placeholder = "Nhập nội dung", min_length = 5, style = TextStyle.short, required = False)
+    content = ui.TextInput(label = "Nội dung", placeholder = "Nhập nội dung", min_length = 5, style = TextStyle.paragraph, required = False)
     end_date = ui.TextInput(label = "Ngày nhắc nhở (dd/mm/yyyy)", placeholder = f"Nhập ngày nhắc nhở", default = datetime.now().strftime("%d/%m/%Y"), min_length = 8, max_length = 10, style = TextStyle.short, required = True)
     end_time = ui.TextInput(label = "Thời gian nhắc nhở (hh:mm)", placeholder = "Nhập thời gian nhắc nhở", default = datetime.now().strftime("%H:%M"), min_length = 3, max_length = 5, style = TextStyle.short, required = True)
     
@@ -61,3 +61,39 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
         
         await interaction.followup.send(f"Tạo nhắc nhở thành công! Bạn có thể chỉnh sửa lại nội dung với `/remind edit_from_id <id>`", embed = embed, ephemeral = True)
+        
+class VotePanel(ui.Modal):    
+    # title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 5, max_length = 100, style = TextStyle.short, required = True)
+    
+    def __init__(self, id_ : int, num_of_vote : int, description : str, textchannel : TextChannel, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.id_ = id_
+        self.description = description
+        self.num_of_vote = num_of_vote
+        self.textchannel = textchannel
+        
+        for i in range(num_of_vote):
+            self.add_item(ui.TextInput(label = f"Vote {i+1}", placeholder = f"Nhập nội dung vote {i+1}", min_length = 5, max_length = 100, style = TextStyle.short, required = True))
+    
+    async def on_submit(self, interaction: Interaction) -> None:
+        await interaction.response.defer()
+        
+        embed = Embed(title = f"{self.title}", description = self.description, color = 0x00ff00)
+        embed.set_author(name = f"Vote ID: {self.id_}")
+        for i in range(self.num_of_vote):
+            embed.add_field(name = f"👉 Vote {i+1}", value = self.children[i].value, inline = False)
+        embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
+        
+        message = await self.textchannel.send("Chọn một trong các emoji ở bên dưới để vote", embed = embed)
+        if self.num_of_vote == 1:
+            await message.add_reaction("👍")
+            await message.add_reaction("👎")
+            
+        else:
+            emojes = ["1️⃣", "2️⃣", "3️⃣", "4️⃣", "5️⃣"]
+            for i in range(self.num_of_vote):
+                await message.add_reaction(emojes[i])
+        
+        await interaction.followup.send(f"Đã gửi vote đến kênh {self.textchannel.mention}", ephemeral = True)
+        
