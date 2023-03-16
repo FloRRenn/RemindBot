@@ -104,25 +104,26 @@ class Reminder(commands.GroupCog, name = "remind"):
             data["content"] = content
             
         if end_date != "":
-            end_date_ = datetime.strptime(end_date, "%d/%m/%Y").date()
-            now = datetime.now().date()
-            if not is_valid_with_pattern(end_date, "date_pattern") or end_date_ < now:
-                return await interaction.response.send_message("**Ngày không hợp lệ**", ephemeral = True)
+            if not is_valid_with_pattern(end_date, "date_pattern"):
+                return await interaction.response.send_message("**Định dạng ngày không hợp lệ (dd/mm/yyyy)**", ephemeral = True)
             data["end_date"] = end_date
         else:
             data["end_date"] = remind_data["end_date"]
             
         if end_time != "":
             if not is_valid_with_pattern(end_time, "time_pattern"):
-                return await interaction.response.send_message("**Thời gian không hợp lệ**", ephemeral = True)
+                return await interaction.response.send_message("**Định dạng thời gian không hợp lệ (HH:MM)**", ephemeral = True)
             data["end_time"] = end_time
         else:
             data["end_time"] = remind_data["end_time"]
-            
+        
+        timestmap = convert_to_timestamp(f"{data['end_time']} {data['end_time']}")
+        timestmap_now = int(datetime.timestamp(datetime.now())) + 5*60
+        if timestmap < timestmap_now:
+            return await interaction.followup.send("Thời gian nhắc nhở phải sau 5 phút kể từ thời điểm hiện tại.", ephemeral = True)
+        
         if mention_who is not None:
             data["mention_id"] = [mention_who.id, interaction.user.id]
-        
-        data["timestamp"] = convert_to_timestamp(data["end_date"] + " " + data["end_time"], "%d/%m/%Y %H:%M")
         
         self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
         self.update_timestamp(remind_id, data["timestamp"])

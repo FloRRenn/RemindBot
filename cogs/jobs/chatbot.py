@@ -29,7 +29,8 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     async def _set_api_key(self, interaction : Interaction, api_key : str):
         data = {
             "api_key" : api_key,
-            "type" : "api_key"
+            "type" : "api_key",
+            "default_key" : True
         }
 
         self.db.update({"type" : "api_key"}, {"$set" : data})
