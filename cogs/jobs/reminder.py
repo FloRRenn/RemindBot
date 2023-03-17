@@ -33,7 +33,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         self.guild_cache[guildID] = channelID
         await interaction.response.send_message(f"Đã thiết lập kênh mặc định là {channel.mention}", ephemeral = True)
         
-    @app_commands.command(name = "new", description = "Tạo nhắc nhở mới")
+    @app_commands.command(name = "create", description = "Tạo nhắc nhở mới")
     async def _set_remind(self, interaction : Interaction, mention_who : Optional[Member] = None):
         mention_id = [interaction.user.id]
         if mention_who:

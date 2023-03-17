@@ -10,7 +10,7 @@ class VoteCMD(commands.GroupCog, name = "vote"):
         self.bot = bot
         self.db = Database("vote")
         
-    @app_commands.command(name = "new", description = "Tạo vote")
+    @app_commands.command(name = "create", description = "Tạo vote")
     async def _new_vote(self, interaction : Interaction, title : app_commands.Range[str, 3, 50], how_many_votes : app_commands.Range[int, 1, 5], 
                         description : Optional[str] = "", thumbnail : Optional[str] = "",
                         send_to : Optional[TextChannel] = None):

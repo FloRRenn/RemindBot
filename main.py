@@ -9,13 +9,17 @@ import logging.handlers
 
 class Bot(commands.Bot):
     def __init__(self):
-        super().__init__(command_prefix = "$$", intents = discord.Intents.all())
+        intent = discord.Intents.all()
+        intent.members = True
+        intent.presences = True
+        intent.guilds = True
+        super().__init__(command_prefix = "$$", intents = intent)
         
     async def setup_hook(self):
         # cogs = ["bot.about", "bot.cmd",
-        #         "server.channel", "server.delete", "server.moderate", "server.server
+        #         "server.channel", "server.delete", "server.moderate", "server.server",
         #          "jobs.reminder","jobs.chatbot","jobs.votes"]
-        cogs = []
+        cogs = ["server.server"]
         
         for cog in cogs:
             await self.load_extension(f"cogs.{cog}")

@@ -157,5 +157,65 @@ class VoteEditPanel(ui.Modal):
         
     async def on_error(self, interaction: Interaction, error) -> None:
         await interaction.response.send_message("Đã có lỗi xảy ra, xem lại thông tin!", ephemeral = True)
+        
+class ToDoPanel(ui.Modal, title = "Công việc mới"):
+    title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 3, max_length = 100, style = TextStyle.short, required = True)
+    todo_list = ui.TextInput(label = "Danh sách công việc", placeholder = "Nhập danh sách công việc", min_length = 5, style = TextStyle.long, required = True)
     
+    def __init__(self, textchannel : TextChannel, db, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        
+        self.textchannel = textchannel
+        self.db = db
+        
+    async def on_submit(self, interaction: Interaction) -> None:
+        todo_id = randint(0, 9999)
+        
+        data = {
+            "todo_id" : todo_id,
+            "user_id" : interaction.user.id,
+            "todo_list" : self.todo_list.value,
+            "title" : self.title_.value,
+            "channel_id" : self.textchannel
+        }
+        self.db.insert(data)
+        
+        if self.textchannel:
+            embed = Embed(title = f"{self.title_.value}", description = self.todo_list.value, color = 0x00ff00)
+            embed.set_author(name = f"Todo ID: {todo_id}")
+            embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
+            
+            await self.textchannel.send(embed = embed)
+        
+class ToDoPanelEdit(ui.Modal):
+    def __init__(self, todo_id, title, todo_list, textchannel, db, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+        
+        self.todo_id = todo_id
+        self.textchannel = textchannel
+        self.db = db
+        
+        self.add_item(ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 3, max_length = 100, style = TextStyle.short, required = True, default = title))
+        self.add_item(ui.TextInput(label = "Danh sách công việc", placeholder = "Nhập danh sách công việc", min_length = 5, style = TextStyle.long, required = True, default = todo_list))
+        
+    async def on_submit(self, interaction: Interaction) -> None:
+        data = {
+            "title" : self.children[0].value,
+            "todo_list" : self.children[1].value,
+            "user_id" : interaction.user.id,
+            "todo_id" : self.todo_id,
+        }
+        
+        if self.textchannel:
+            channel = interaction.client.get_channel(self.textchannel)
+            message = await channel.fetch_message(self.todo_id)
+            
+            embed = message.embeds[0]
+            embed.title = self.children[0].value
+            embed.description = self.children[1].value
+        
+            await message.edit(embed = embed)
+        
+        self.db.update({"user_id" : interaction.user.id, "todo_id" : self.todo_id}, {"$set" : data})  
+        await interaction.response.send_message("Đã chỉnh sửa công việc thành công!", ephemeral = True)
     
