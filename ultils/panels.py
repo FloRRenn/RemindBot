@@ -154,5 +154,8 @@ class VoteEditPanel(ui.Modal):
         self.db.update({"user_id" : user_id},{"$set" : data}) 
         await message.edit(embed = embed)
         await interaction.response.send_message("Đã chỉnh sửa vote thành công!", ephemeral = True)
+        
+    async def on_error(self, interaction: Interaction, error) -> None:
+        await interaction.response.send_message("Đã có lỗi xảy ra, xem lại thông tin!", ephemeral = True)
     
     
