@@ -39,7 +39,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         if mention_who:
             mention_id.append(mention_who.id)
             
-        modal = NewRemind(mention_who)
+        modal = NewRemind(mention_who, self.db)
         await interaction.response.send_modal(modal)
         
     @app_commands.command(name = "get_remind_id", description = "Lấy lịch nhắc từ ID")

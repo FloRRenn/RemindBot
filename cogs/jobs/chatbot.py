@@ -69,7 +69,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
 
         file = File(filename)        
         await interaction.response.send_message("**Đây là cuộc trò chuyện hiện tại của bạn**", file = file)
-
+        file.close()
         os.remove(filename)
 
     @app_commands.command(name = "reset_chat", description = "Xóa thông tin về cuộc trò chuyện cũ")
