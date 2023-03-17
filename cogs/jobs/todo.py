@@ -5,7 +5,7 @@ from typing import Optional
 from ultils.panels import ToDoPanel, ToDoPanelEdit
 from ultils.db_action import Database
 
-class ToDo(commands.GroupCog, name = "ToDo"):
+class todojob(commands.GroupCog, name = "todo"):
     def __init__(self, bot : commands.Bot) -> None:
         self.bot = bot
         self.db = Database("todo")
@@ -22,7 +22,7 @@ class ToDo(commands.GroupCog, name = "ToDo"):
             return await interaction.response.send_message(f"Không tìm thấy công việc có id {todo_id}", ephemeral = True)
         
         title = f"Chỉnh sửa công việc {todo_id}"
-        panel = ToDoPanelEdit(todo_id, title, data["todo_list"], send_to, self.db)
+        panel = ToDoPanelEdit(todo_id, title, data["title"], data["todo_list"], send_to, self.db)
         await interaction.response.send_modal(panel)
         
     @app_commands.command(name = "delete", description = "Xóa công việc")
@@ -36,13 +36,13 @@ class ToDo(commands.GroupCog, name = "ToDo"):
         
     @app_commands.command(name = "list", description = "Xem danh sách công việc")
     async def _list(self, interaction : Interaction) -> None:
-        await interaction.response.defer()
+        await interaction.response.defer(ephemeral = True)
         
         data = self.db.get_all({"user_id": interaction.user.id})
         check = False
         
         for i in data:
-            embed = Embed(title = i["title"], description = i["todo_list"])
+            embed = Embed(title = i["title"], description = i["todo_list"], color = 0x00ff00)
             embed.set_author(name = f"ID: {i['todo_id']}")
             embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
             await interaction.followup.send(embed = embed, ephemeral = True)
@@ -50,3 +50,6 @@ class ToDo(commands.GroupCog, name = "ToDo"):
         
         if not check:
             await interaction.followup.send("Bạn chưa có công việc nào", ephemeral = True)
+            
+async def setup(bot : commands.Bot):
+    await bot.add_cog(todojob(bot))

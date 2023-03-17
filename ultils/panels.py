@@ -176,7 +176,7 @@ class ToDoPanel(ui.Modal, title = "Công việc mới"):
             "user_id" : interaction.user.id,
             "todo_list" : self.todo_list.value,
             "title" : self.title_.value,
-            "channel_id" : self.textchannel
+            "channel_id" : self.textchannel.id
         }
         self.db.insert(data)
         
@@ -186,16 +186,17 @@ class ToDoPanel(ui.Modal, title = "Công việc mới"):
             embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
             
             await self.textchannel.send(embed = embed)
+        await interaction.response.send_message(f"Đã tạo ToDo thành công.", ephemeral = True)
         
 class ToDoPanelEdit(ui.Modal):
-    def __init__(self, todo_id, title, todo_list, textchannel, db, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    def __init__(self, todo_id, panel_title, todo_title, todo_list, textchannel, db, *args, **kwargs) -> None:
+        super().__init__(title = panel_title, *args, **kwargs)
         
         self.todo_id = todo_id
         self.textchannel = textchannel
         self.db = db
         
-        self.add_item(ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 3, max_length = 100, style = TextStyle.short, required = True, default = title))
+        self.add_item(ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 3, max_length = 100, style = TextStyle.short, required = True, default = todo_title))
         self.add_item(ui.TextInput(label = "Danh sách công việc", placeholder = "Nhập danh sách công việc", min_length = 5, style = TextStyle.long, required = True, default = todo_list))
         
     async def on_submit(self, interaction: Interaction) -> None:

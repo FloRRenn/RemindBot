@@ -42,7 +42,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         modal = NewRemind(mention_who, self.db)
         await interaction.response.send_modal(modal)
         
-    @app_commands.command(name = "get_remind_id", description = "Lấy lịch nhắc từ ID")
+    @app_commands.command(name = "get", description = "Lấy lịch nhắc từ ID")
     async def _get_remind_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999]):
         remind = self.db.find({"remind_id" : remind_id, "user_id" : interaction.user.id})
         if remind:
@@ -75,7 +75,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         
         await interaction.response.send_message("**Bạn không có lịch nhắc nào**", ephemeral = True)
         
-    @app_commands.command(name = "delete_from_id", description = "Xóa lịch nhắc của bạn")
+    @app_commands.command(name = "delete", description = "Xóa lịch nhắc của bạn")
     async def _delete_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999]):
         query = { "user_id" : interaction.user.id, "remind_id" : remind_id}
         result = self.db.remove(query)
@@ -85,7 +85,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         else:
             await interaction.response.send_message("**Không tìm thấy lịch nhắc**", ephemeral = True)
             
-    @app_commands.command(name = "edit_from_id", description = "Sửa lịch nhắc của bạn")
+    @app_commands.command(name = "edit", description = "Sửa lịch nhắc của bạn")
     async def _edit_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999],
                             title : Optional[str] = "", content : Optional[str] = "", 
                             end_date : Optional[str] = "", end_time : Optional[str] = "",
