@@ -19,7 +19,7 @@ class Bot(commands.Bot):
         # cogs = ["bot.about", "bot.cmd",
         #         "server.channel", "server.delete", "server.moderate", "server.server",
         #          "jobs.reminder","jobs.chatbot","jobs.votes", "jobs.todo"]
-        cogs = ["jobs.todo"]
+        cogs = ["other.emotion"]
         
         for cog in cogs:
             await self.load_extension(f"cogs.{cog}")
@@ -37,7 +37,7 @@ def setup_log():
         filename = 'discord.log',
         encoding = 'utf-8',
         maxBytes = 8 * 1024 * 1024,
-        backupCount = 2
+        backupCount = 2 
     )
     dt_fmt = '%d/%m/%Y %H:%M:%S'
     formatter = logging.Formatter('[{asctime}] [{levelname:<8}] {name}: {message}', dt_fmt, style='{')

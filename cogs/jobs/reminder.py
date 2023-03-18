@@ -156,6 +156,17 @@ class Reminder(commands.GroupCog, name = "remind"):
     @remind_checker.before_loop
     async def before_remind_checker(self):
         await self.bot.wait_until_ready()
+        
+    @app_commands.command(name = "when_user_is_online", description = "Thông báo cho bạn khi người dùng online")
+    async def _notify_online(self, interaction : Interaction, user : Member):
+        user_id = user.id
+        notified_user = interaction.user.id
+        
+        data = {
+            "user_id" : user_id,
+            "notified_user" : notified_user,
+        }
+        self.db.update(data, data, upsert = True)
 
 async def setup(bot : commands.Bot):
     await bot.add_cog(Reminder(bot))

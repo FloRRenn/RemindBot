@@ -16,8 +16,8 @@ class Database:
     def count(self, *args, **kwargs):
         return self.collection.count_documents(*args, **kwargs)
         
-    def insert(self, key):
-        self.collection.insert_one(key)
+    def insert(self, *args, **kwargs):
+        self.collection.insert_one(*args, **kwargs)
         
     def get_all(self, *args, **kwargs):
         return self.collection.find(*args, **kwargs)
@@ -33,4 +33,10 @@ class Database:
         
     def update(self, *args, **kwargs):
         return self.collection.update_one(*args, **kwargs)
+    
+    def get_random(self, query, *args, **kwargs):
+        return self.collection.aggregate([
+                                {"$match": query},
+                                {"$sample": {"size": 1}}
+                            ]).next()
     
