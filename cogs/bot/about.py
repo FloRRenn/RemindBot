@@ -3,7 +3,7 @@ from discord.ext import commands
 from discord import Interaction, Embed
 
 from time import time
-from ultils import convert_to_date
+from ultils.time_convert import convert_to_date
 
 class AboutBot(commands.GroupCog, name = "bot"):
     def __init__(self, bot: commands.Bot) -> None:

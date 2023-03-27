@@ -57,6 +57,9 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         embed.set_author(name = f"Remind ID: {remind_id}")
         embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
         
+        #channel_id = self.db.find({"type" : "channel", "guild_id" : interaction.guild.id})
+        channel = await interaction.guild.fetch_channel(1058633075166302258)
+        await channel.send(embed = embed)
         await interaction.followup.send(f"Tạo nhắc nhở thành công! Bạn có thể chỉnh sửa lại nội dung với `/remind edit_from_id <id>`", embed = embed, ephemeral = True)
         
 class VotePanel(ui.Modal):    

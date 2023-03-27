@@ -1,31 +1,31 @@
+import aiohttp
 anime_query = '''
         query ($name: String){
           Media(search: $name, type: ANIME) {
             idMal
-            description
+            description(asHtml: false)
             title {
               native
-              english
+              romaji
             }
-            coverImage {
-              medium
-            }
+            bannerImage
             startDate {
               year
               month
               day
-            }
-            rankings {
-                type
-                rank
-                year
-                context
             }
             status
             episodes
             duration
             nextAiringEpisode {
               episode
+            }
+            characters(role: MAIN) {
+              nodes {
+                name {
+                  full
+                }
+              }
             }
             genres
             studios(isMain: true) {
@@ -39,19 +39,25 @@ anime_query = '''
         }
         '''
 
-import aiohttp
 
-GRAPHQL_URL = 'https://graphql.anilist.co'    
+GRAPHQL_URL = 'https://graphql.anilist.co'
+
 
 async def anime_search(anime_name):
-    variables = {
-            'name': anime_name
-        }
-    async with aiohttp.ClientSession() as session:
-        async with session.post(GRAPHQL_URL, json={'query': anime_query, 'variables': variables}) as r:
-            if r.status == 200:
-                json = await r.json()
-                return json
-            else:
-                return None
+  variables = {
+      'name': anime_name
+  }
+  async with aiohttp.ClientSession() as session:
+      async with session.post(GRAPHQL_URL, json={'query': anime_query, 'variables': variables}) as r:
+          if r.status == 200:
+              json = await r.json()
+              return json["data"]["Media"]
+          else:
+            print(r.content)
+            print(r.status)
+            return None
 
+
+async def studio_search(studio_name):
+  pass
+  

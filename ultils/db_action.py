@@ -1,6 +1,5 @@
 from dotenv import load_dotenv
 from os import getenv
-import pprint
 
 from pymongo import MongoClient
 
@@ -16,8 +15,8 @@ class Database:
     def count(self, *args, **kwargs):
         return self.collection.count_documents(*args, **kwargs)
         
-    def insert(self, *args, **kwargs):
-        self.collection.insert_one(*args, **kwargs)
+    def insert(self, data, *args, **kwargs):
+        self.collection.insert_one(data, *args, **kwargs)
         
     def get_all(self, *args, **kwargs):
         return self.collection.find(*args, **kwargs)
@@ -39,4 +38,5 @@ class Database:
                                 {"$match": query},
                                 {"$sample": {"size": 1}}
                             ]).next()
+        
     

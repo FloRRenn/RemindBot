@@ -6,7 +6,7 @@ from discord import Interaction
 from discord.ext.commands import ExtensionNotLoaded, ExtensionNotFound,\
                                 ExtensionAlreadyLoaded, ExtensionFailed
                                 
-from ultils import is_botOwner
+from ultils.permission import is_botOwner
 
 class ManangeCOG(commands.GroupCog, name = "cog"):
     def __init__(self, bot: commands.Bot) -> None:

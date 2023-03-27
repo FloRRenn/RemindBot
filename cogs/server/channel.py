@@ -4,8 +4,8 @@ from discord.ext import commands, tasks
 from typing import Optional
 import time
 
-from ultils import covert_str_to_seconds, convert_to_date
-from ultils import Database
+from ultils.time_convert import covert_str_to_seconds, convert_to_date
+from ultils.db_action import Database
 
 class ManageChannel(commands.GroupCog, name = "channel"):
     def __init__(self, bot : commands.Bot):

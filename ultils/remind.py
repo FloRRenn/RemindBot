@@ -1,4 +1,3 @@
-from datetime import datetime
 from discord import Embed
 
 class Remind:
