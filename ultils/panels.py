@@ -44,7 +44,7 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         channel_id = self.db.find({"type" : "default_channel", "guild_id" : interaction.guild.id})
         channel = await interaction.guild.fetch_channel(channel_id["default_channel"])
         
-        message = await channel.send(embed = embed)
+        message = await channel.send(f"<@&{self.mention_id}>", embed = embed)
         await interaction.followup.send(f"Tạo nhắc nhở thành công! Bạn có thể chỉnh sửa lại nội dung với `/remind edit_from_id <id>`", embed = embed, ephemeral = True)
         
         data = {
@@ -61,6 +61,56 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
             "timestamp" : timestamp,
         }
         self.db.insert(data)
+        
+        
+class RemindEditPannel(ui.Modal):
+    def __init__(self, db, data, channel_id, *args, **kwags) -> None:
+        super().__init__(*args, **kwags)
+        
+        self.title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", default = data['title'] ,min_length = 5, max_length = 100, style = TextStyle.short, required = True)
+        self.content = ui.TextInput(label = "Nội dung", placeholder = "Nhập nội dung", default = data['content'] ,min_length = 5, style = TextStyle.paragraph, required = False)
+        self.end_date = ui.TextInput(label = "Ngày nhắc nhở (dd/mm/yyyy)", placeholder = "25/10/2023", default = data['end_date'], min_length = 8, max_length = 10, style = TextStyle.short, required = True)
+        self.end_time = ui.TextInput(label = "Thời gian nhắc nhở (hh:mm)", placeholder = "15:41", default = data['end_time'], min_length = 3, max_length = 5, style = TextStyle.short, required = True)
+        
+        self.add_item(self.title_)
+        self.add_item(self.content)
+        self.add_item(self.end_date)
+        self.add_item(self.end_time)
+        
+        self.db = db
+        self.message_id = data["message_id"]
+        self.remind_id = data["remind_id"]
+        self.channel_id = channel_id
+        
+    async def on_submit(self, interaction: Interaction) -> None:
+        await interaction.response.defer()
+        
+        if not is_valid_with_pattern(self.end_date.value, "date_pattern"):
+            return await interaction.followup.send("Ngày không hợp lệ, format phải là d/m/yyyy", ephemeral = True)
+            
+        if not is_valid_with_pattern(self.end_time.value, "time_pattern"):
+            return await interaction.followup.send("Thời gian không hợp lệ, format phải là hh:mm", ephemeral = True)
+        
+        timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Etc/GMT')
+
+        channel = interaction.client.get_channel(self.channel_id)
+        message = await channel.fetch_message(self.message_id)
+        embed = message.embeds[0]
+        
+        timestmap_for_showing = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Asia/Ho_Chi_Minh')
+        embed.title = self.title_.value
+        embed.description = self.content.value
+        embed.set_field_at(0, name = "Thời gian", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestmap_for_showing}:R>")
+        await message.edit(embed = embed)
+        
+        data = {
+            "title" : self.title_.value,
+            "content" : self.content.value,
+            "end_date" : self.end_date.value,
+            "end_time" : self.end_time.value,
+            "timestamp" : timestamp,
+        }
+        self.db.update({"user_id" : interaction.user.id, "remind_id" : self.remind_id, "guild_id" : interaction.guild.id}, {"$set" : data})
         
 class VotePanel(ui.Modal):    
     # title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 5, max_length = 100, style = TextStyle.short, required = True)

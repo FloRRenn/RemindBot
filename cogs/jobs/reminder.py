@@ -3,7 +3,8 @@ from discord.ext import commands, tasks
 from typing import Optional
 
 from ultils.db_action import Database
-from ultils.panels import NewRemind, is_valid_with_pattern, datetime, convert_to_another_timezone
+from ultils.panels import NewRemind, RemindEditPannel, \
+                        is_valid_with_pattern, datetime, convert_to_another_timezone
 
 class Reminder(commands.GroupCog, name = "remind"):
     def __init__(self, bot : commands.Bot):
@@ -82,47 +83,15 @@ class Reminder(commands.GroupCog, name = "remind"):
             await interaction.response.send_message("**Không tìm thấy lịch nhắc**", ephemeral = True)
             
     @app_commands.command(name = "edit", description = "Sửa lịch nhắc của bạn")
-    async def _edit_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999],
-                            title : Optional[str] = "", content : Optional[str] = "", 
-                            end_date : Optional[str] = "", end_time : Optional[str] = "",
-                            mention_who : Optional[Role] = None):
-        
-        
+    async def _edit_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999]):
         data = {"remind_id" : remind_id, "user_id" : interaction.user.id}
         remind_data = self.db.find(data)
         if not remind_data:
             return await interaction.response.send_message(f"**Không tìm thấy lịch nhắc có id {remind_id}**", ephemeral = True)
         
-        if title != "":
-            remind_data["title"] = title
-            
-        if content != "":
-            data["content"] = content
-            
-        if end_date != "":
-            if not is_valid_with_pattern(end_date, "date_pattern"):
-                return await interaction.response.send_message("**Định dạng ngày không hợp lệ (dd/mm/yyyy)**", ephemeral = True)
-            data["end_date"] = end_date
-        else:
-            data["end_date"] = remind_data["end_date"]
-            
-        if end_time != "":
-            if not is_valid_with_pattern(end_time, "time_pattern"):
-                return await interaction.response.send_message("**Định dạng thời gian không hợp lệ (HH:MM)**", ephemeral = True)
-            data["end_time"] = end_time
-        else:
-            data["end_time"] = remind_data["end_time"]
-        
-        timestmap = convert_to_another_timezone(f"{data['end_time']} {data['end_time']}", 'Asia/Ho_Chi_Minh', 'Etc/GMT')
-        timestmap_now = int(datetime.timestamp(datetime.now())) + 5*60
-        if timestmap < timestmap_now:
-            return await interaction.followup.send("Thời gian nhắc nhở phải sau 5 phút kể từ thời điểm hiện tại.", ephemeral = True)
-        
-        if mention_who is not None:
-            data["mention_id"] = mention_who.id
-        
-        self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
-        await interaction.response.send_message("**Đã sửa thành công**", ephemeral = True)
+        channel = self.db.find({"type" : "default_channel", "guild_id" : interaction.guild.id})
+        pannelEdit = RemindEditPannel(self.db, remind_data, channel["default_channel"], title = f"Edit remind ID {remind_id}")
+        await interaction.response.send_modal(pannelEdit)
         
     @tasks.loop(minutes = 2)
     async def remind_checker(self):
@@ -137,10 +106,11 @@ class Reminder(commands.GroupCog, name = "remind"):
             for remind in reminds_list:
                 if timestmap >= remind["timestamp"]:
                     self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
-                    user = f"<@&{remind['mention_id']}>"
+                    user = f"<@&{remind['mention_id']}> - **Đã dến thời gian**"
                     
-                    embed = Embed(title = remind["title"], description = remind["content"], color = 0x00ff00)
+                    embed = Embed(title = remind["title"], description = remind["content"], color = 0xFF0000)
                     embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
+                    embed.set_thumbnail(url = "https://cdn-icons-png.flaticon.com/512/6459/6459980.png")
                     
                     await self.bot.get_channel(self.guild_cache[remind["guild_id"]]).send(user, embed = embed)
                 timestmap += alignment
