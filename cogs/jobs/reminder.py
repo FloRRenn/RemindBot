@@ -1,4 +1,4 @@
-from discord import app_commands, Interaction, Member, TextChannel, Embed
+from discord import app_commands, Interaction, Member, TextChannel, Embed, Role
 from discord.ext import commands, tasks
 from typing import Optional
 
@@ -34,12 +34,8 @@ class Reminder(commands.GroupCog, name = "remind"):
         await interaction.response.send_message(f"Đã thiết lập kênh mặc định là {channel.mention}", ephemeral = True)
         
     @app_commands.command(name = "create", description = "Tạo nhắc nhở mới")
-    async def _set_remind(self, interaction : Interaction, mention_who : Optional[Member] = None):
-        mention_id = [interaction.user.id]
-        if mention_who:
-            mention_id.append(mention_who.id)
-            
-        modal = NewRemind(mention_id, self.db)
+    async def _set_remind(self, interaction : Interaction, mention_role : Role):
+        modal = NewRemind(mention_role.id, self.db)
         await interaction.response.send_modal(modal)
         
     @app_commands.command(name = "get", description = "Lấy lịch nhắc từ ID")
@@ -89,7 +85,7 @@ class Reminder(commands.GroupCog, name = "remind"):
     async def _edit_from_id(self, interaction : Interaction, remind_id : app_commands.Range[int, 0, 9999],
                             title : Optional[str] = "", content : Optional[str] = "", 
                             end_date : Optional[str] = "", end_time : Optional[str] = "",
-                            mention_who : Optional[Member] = None):
+                            mention_who : Optional[Role] = None):
         
         
         data = {"remind_id" : remind_id, "user_id" : interaction.user.id}
@@ -98,7 +94,7 @@ class Reminder(commands.GroupCog, name = "remind"):
             return await interaction.response.send_message(f"**Không tìm thấy lịch nhắc có id {remind_id}**", ephemeral = True)
         
         if title != "":
-            data["title"] = title
+            remind_data["title"] = title
             
         if content != "":
             data["content"] = content
@@ -123,10 +119,9 @@ class Reminder(commands.GroupCog, name = "remind"):
             return await interaction.followup.send("Thời gian nhắc nhở phải sau 5 phút kể từ thời điểm hiện tại.", ephemeral = True)
         
         if mention_who is not None:
-            data["mention_id"] = [mention_who.id, interaction.user.id]
+            data["mention_id"] = mention_who.id
         
         self.db.update({"user_id" : interaction.user.id, "remind_id" : remind_id}, {"$set" : data})
-        self.update_timestamp(remind_id, data["timestamp"])
         await interaction.response.send_message("**Đã sửa thành công**", ephemeral = True)
         
     @tasks.loop(minutes = 2)
@@ -142,10 +137,7 @@ class Reminder(commands.GroupCog, name = "remind"):
             for remind in reminds_list:
                 if timestmap >= remind["timestamp"]:
                     self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
-                    
-                    user = ""
-                    for user_id in remind["mention_id"]:
-                        user += f"<@{user_id}> "
+                    user = f"<@&{remind['mention_id']}>"
                     
                     embed = Embed(title = remind["title"], description = remind["content"], color = 0x00ff00)
                     embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
@@ -156,17 +148,6 @@ class Reminder(commands.GroupCog, name = "remind"):
     @remind_checker.before_loop
     async def before_remind_checker(self):
         await self.bot.wait_until_ready()
-        
-    @app_commands.command(name = "when_user_is_online", description = "Thông báo cho bạn khi người dùng online")
-    async def _notify_online(self, interaction : Interaction, user : Member):
-        user_id = user.id
-        notified_user = interaction.user.id
-        
-        data = {
-            "user_id" : user_id,
-            "notified_user" : notified_user,
-        }
-        self.db.update(data, data, upsert = True)
 
 async def setup(bot : commands.Bot):
     await bot.add_cog(Reminder(bot))
