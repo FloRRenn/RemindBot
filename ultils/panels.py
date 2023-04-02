@@ -11,8 +11,8 @@ def convert_to_timestamp(datetime_string):
 class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
     title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 5, max_length = 100, style = TextStyle.short, required = True)
     content = ui.TextInput(label = "Nội dung", placeholder = "Nhập nội dung", min_length = 5, style = TextStyle.paragraph, required = False)
-    end_date = ui.TextInput(label = "Ngày nhắc nhở (dd/mm/yyyy)", placeholder = f"Nhập ngày nhắc nhở", default = datetime.now().strftime("%d/%m/%Y"), min_length = 8, max_length = 10, style = TextStyle.short, required = True)
-    end_time = ui.TextInput(label = "Thời gian nhắc nhở (hh:mm)", placeholder = "Nhập thời gian nhắc nhở", default = datetime.now().strftime("%H:%M"), min_length = 3, max_length = 5, style = TextStyle.short, required = True)
+    end_date = ui.TextInput(label = "Ngày nhắc nhở (dd/mm/yyyy)", placeholder = "25/10/2023", min_length = 8, max_length = 10, style = TextStyle.short, required = True)
+    end_time = ui.TextInput(label = "Thời gian nhắc nhở (hh:mm)", placeholder = "15:41", min_length = 3, max_length = 5, style = TextStyle.short, required = True)
     
     def __init__(self, user_mention : int, db) -> None:
         super().__init__()
@@ -28,12 +28,7 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         if not is_valid_with_pattern(self.end_time.value, "time_pattern"):
             return await interaction.followup.send("Thời gian không hợp lệ, format phải là hh:mm", ephemeral = True)
         
-        # timestmap = convert_to_timestamp(f"{self.end_date.value} {self.end_time.value}")
-        # timestmap_now = int(datetime.timestamp(datetime.now())) + 30*60
-        # if timestmap < timestmap_now:
-        #     return await interaction.followup.send("Thời gian nhắc nhở phải sau 30 phút kể từ thời điểm hiện tại.", ephemeral = True)
-        
-        timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Etc/GMT-7', 'Etc/GMT-3')
+        timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Etc/GMT')
         timestmap_now = int(datetime.timestamp(datetime.now())) + 30*60
         if timestamp < timestmap_now:
             return await interaction.followup.send("Thời gian nhắc nhở phải sau 30 phút kể từ thời điểm hiện tại.", ephemeral = True)
@@ -57,13 +52,14 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         }
         self.db.insert(data)
         
+        timestmap_for_showing = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Asia/Ho_Chi_Minh')
         embed = Embed(title = self.title_.value, description = self.content.value, color = 0x00ff00)
-        embed.add_field(name = "Ngày nhắc nhở", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestamp}:R>")
+        embed.add_field(name = "Ngày nhắc nhở", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestmap_for_showing}:R>")
         embed.set_author(name = f"Remind ID: {remind_id}")
         embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
         
-        #channel_id = self.db.find({"type" : "channel", "guild_id" : interaction.guild.id})
-        channel = await interaction.guild.fetch_channel(1058633075166302258)
+        channel_id = self.db.find({"type" : "default_channel", "guild_id" : interaction.guild.id})
+        channel = await interaction.guild.fetch_channel(channel_id)
         await channel.send(embed = embed)
         await interaction.followup.send(f"Tạo nhắc nhở thành công! Bạn có thể chỉnh sửa lại nội dung với `/remind edit_from_id <id>`", embed = embed, ephemeral = True)
         

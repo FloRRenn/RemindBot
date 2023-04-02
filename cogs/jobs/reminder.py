@@ -3,7 +3,7 @@ from discord.ext import commands, tasks
 from typing import Optional
 
 from ultils.db_action import Database
-from ultils.panels import NewRemind, is_valid_with_pattern, datetime, convert_to_timestamp
+from ultils.panels import NewRemind, is_valid_with_pattern, datetime, convert_to_another_timezone
 
 class Reminder(commands.GroupCog, name = "remind"):
     def __init__(self, bot : commands.Bot):
@@ -117,7 +117,7 @@ class Reminder(commands.GroupCog, name = "remind"):
         else:
             data["end_time"] = remind_data["end_time"]
         
-        timestmap = convert_to_timestamp(f"{data['end_time']} {data['end_time']}")
+        timestmap = convert_to_another_timezone(f"{data['end_time']} {data['end_time']}", 'Asia/Ho_Chi_Minh', 'Etc/GMT')
         timestmap_now = int(datetime.timestamp(datetime.now())) + 5*60
         if timestmap < timestmap_now:
             return await interaction.followup.send("Thời gian nhắc nhở phải sau 5 phút kể từ thời điểm hiện tại.", ephemeral = True)
