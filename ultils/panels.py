@@ -103,7 +103,7 @@ class RemindEditPannel(ui.Modal):
         embed.set_field_at(0, name = "Thời gian", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestmap_for_showing}:R>")
         await message.edit(embed = embed)
         
-        data = {
+        data = {    
             "title" : self.title_.value,
             "content" : self.content.value,
             "end_date" : self.end_date.value,
