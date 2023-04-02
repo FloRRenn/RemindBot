@@ -1,5 +1,5 @@
 from discord import app_commands, Interaction, File
-from discord.ext import commands
+from discord.ext import commands, tasks
 from typing import Optional
 import os
 
@@ -8,7 +8,7 @@ from ultils.db_action import Database
 from ultils.permission import is_botOwner
 
 is_not_answering = True
-def check_it_is_answering(interaction : Interaction):
+def check_it_is_answering(interaction : Interaction = None):
     global is_not_answering
     return is_not_answering
 
@@ -87,6 +87,15 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     @_save_current_chat.error
     async def wait_for_next_chat(self, interaction : Interaction, error):
         await interaction.response.send_message("Bot hiện tại đang trả lời câu hỏi của user. Vui lòng thực hiện lại sau khi bot đã trả lời xong.", ephemeral = True)
+        
+    @tasks.loop(hours = 1)
+    async def _auto_reset_chat(self):
+        if not check_it_is_answering():
+            self.chatbot.reset()
+            
+    @_auto_reset_chat.before_loop
+    async def before_reset_checker(self):
+        await self.bot.wait_until_ready()
 
 async def setup(bot : commands.Bot):
     await bot.add_cog(ChatBot(bot))
