@@ -107,7 +107,7 @@ class Reminder(commands.GroupCog, name = "remind"):
                 if timestmap >= remind["timestamp"]:
                     self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
                     
-                    channel = await self.bot.get_channel(self.guild_cache[remind["guild_id"]])
+                    channel = self.bot.get_channel(self.guild_cache[remind["guild_id"]])
                     message = await channel.fetch_message(remind['message_id'])
                     await message.delete()
                     

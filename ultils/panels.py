@@ -91,7 +91,7 @@ class RemindEditPannel(ui.Modal):
         if not is_valid_with_pattern(self.end_time.value, "time_pattern"):
             return await interaction.followup.send("Thời gian không hợp lệ, format phải là hh:mm", ephemeral = True)
         
-        timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Etc/GMT')
+        timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Asia/Ho_Chi_Minh')
 
         channel = interaction.client.get_channel(self.channel_id)
         message = await channel.fetch_message(self.message_id)
