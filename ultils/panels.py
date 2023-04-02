@@ -29,9 +29,9 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
             return await interaction.followup.send("Thời gian không hợp lệ, format phải là hh:mm", ephemeral = True)
         
         timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Asia/Ho_Chi_Minh', 'Etc/GMT')
-        timestmap_now = int(datetime.timestamp(datetime.now())) + 30*60
-        if timestamp < timestmap_now:
-            return await interaction.followup.send("Thời gian nhắc nhở phải sau 30 phút kể từ thời điểm hiện tại.", ephemeral = True)
+        # timestmap_now = int(datetime.timestamp(datetime.now())) + 30*60
+        # if timestamp < timestmap_now:
+        #     return await interaction.followup.send("Thời gian nhắc nhở phải sau 30 phút kể từ thời điểm hiện tại.", ephemeral = True)
         
         mention_ids = [interaction.user.id]
         if self.mention_id is not None:
