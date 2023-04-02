@@ -106,13 +106,19 @@ class Reminder(commands.GroupCog, name = "remind"):
             for remind in reminds_list:
                 if timestmap >= remind["timestamp"]:
                     self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
+                    
+                    channel = await self.bot.get_channel(self.guild_cache[remind["guild_id"]])
+                    message = await channel.fetch_message(remind['message_id'])
+                    await message.delete()
+                    
+                    embed = message.embeds[0]
                     user = f"<@&{remind['mention_id']}> - **Đã dến thời gian**"
                     
                     embed = Embed(title = remind["title"], description = remind["content"], color = 0xFF0000)
                     embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
                     embed.set_thumbnail(url = "https://cdn-icons-png.flaticon.com/512/6459/6459980.png")
                     
-                    await self.bot.get_channel(self.guild_cache[remind["guild_id"]]).send(user, embed = embed)
+                    await channel.send(user, embed = embed)
                 timestmap += alignment
                 
     @remind_checker.before_loop
