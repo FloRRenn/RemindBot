@@ -30,7 +30,7 @@ class AboutBot(commands.GroupCog, name = "bot"):
         uptime = time() - self.start_time
         
         show = Embed(title = "About me", colour = 0x0FDD62)
-        show.add_field(name = "Onwer", value = "`HiHi#5793`")
+        show.add_field(name = "Owner", value = "`HiHi#5793`")
         show.add_field(name = "Ngày sinh", value = "`15/01/2023`")
         show.add_field(name = "Ping", value = f"`{latency} ms`", inline = False)
         show.add_field(name = "Uptime", value = f"`{convert_to_date(uptime)}`")
