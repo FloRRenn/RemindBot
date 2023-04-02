@@ -1,12 +1,12 @@
 from discord import ui, TextStyle, Interaction, Embed, TextChannel
 from datetime import datetime
-from ultils.time_convert import is_valid_with_pattern
+from ultils.time_convert import is_valid_with_pattern, convert_to_another_timezone
 from random import randint
 
-def convert_to_timestamp(datetime_string):
-    datetime_object = datetime.strptime(datetime_string, '%d/%m/%Y %H:%M')
-    timestamp = datetime.timestamp(datetime_object)
-    return int(timestamp)
+# def convert_to_timestamp(datetime_string):
+#     datetime_object = datetime.strptime(datetime_string, '%d/%m/%Y %H:%M')
+#     timestamp = datetime.timestamp(datetime_object)
+#     return int(timestamp)
 
 class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
     title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 5, max_length = 100, style = TextStyle.short, required = True)
@@ -28,9 +28,14 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
         if not is_valid_with_pattern(self.end_time.value, "time_pattern"):
             return await interaction.followup.send("Thời gian không hợp lệ, format phải là hh:mm", ephemeral = True)
         
-        timestmap = convert_to_timestamp(f"{self.end_date.value} {self.end_time.value}")
+        # timestmap = convert_to_timestamp(f"{self.end_date.value} {self.end_time.value}")
+        # timestmap_now = int(datetime.timestamp(datetime.now())) + 30*60
+        # if timestmap < timestmap_now:
+        #     return await interaction.followup.send("Thời gian nhắc nhở phải sau 30 phút kể từ thời điểm hiện tại.", ephemeral = True)
+        
+        timestamp = convert_to_another_timezone(f"{self.end_date} {self.end_time}", 'Etc/GMT-7', 'Etc/GMT-3')
         timestmap_now = int(datetime.timestamp(datetime.now())) + 30*60
-        if timestmap < timestmap_now:
+        if timestamp < timestmap_now:
             return await interaction.followup.send("Thời gian nhắc nhở phải sau 30 phút kể từ thời điểm hiện tại.", ephemeral = True)
         
         mention_ids = [interaction.user.id]
@@ -48,12 +53,12 @@ class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
             "content" : self.content.value,
             "end_date" : self.end_date.value,
             "end_time" : self.end_time.value,
-            "timestamp" : timestmap,
+            "timestamp" : timestamp,
         }
         self.db.insert(data)
         
         embed = Embed(title = self.title_.value, description = self.content.value, color = 0x00ff00)
-        embed.add_field(name = "Ngày nhắc nhở", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestmap}:R>")
+        embed.add_field(name = "Ngày nhắc nhở", value = self.end_date.value + " " + self.end_time.value + f"\n<t:{timestamp}:R>")
         embed.set_author(name = f"Remind ID: {remind_id}")
         embed.set_footer(text = f"Người tạo: {interaction.user.name}#{interaction.user.discriminator}")
         

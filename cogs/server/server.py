@@ -29,8 +29,14 @@ class Server(commands.Cog):
     #     await interaction.response.send_message(data)
 
     @app_commands.command(name = "help", description = "Tạo kênh")
-    async def _help(self, insteraction : Interaction, search : Optional[str]):
-        pass
+    async def _help(self, interaction : Interaction, search : Optional[str]):
+        import time
+        local_offset = -time.timezone if (time.localtime().tm_isdst == 0) else -time.altzone
+        local_offset_hours = local_offset // 3600
+        local_offset_minutes = (local_offset % 3600) // 60
+        gmt_offset = f"GMT{'+' if local_offset >= 0 else '-'}{abs(local_offset_hours):02d}:{abs(local_offset_minutes):02d}"
+        
+        await interaction.response.send_message(gmt_offset)
     
 async def setup(bot : commands.Bot):
     await bot.add_cog(Server(bot))

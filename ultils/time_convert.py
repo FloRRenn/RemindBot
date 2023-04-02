@@ -1,5 +1,6 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 from re import findall, match
+import pytz
 
 pattern = {
     "date_pattern" : r'^(?:(?:31\/(?:0?[13578]|1[02]))|(?:(?:29|30)\/(?:0?[1,3-9]|1[0-2]))|(?:0?[1-9]|1\d|2[0-8])\/(?:0?[1-9]|1[0-2]))\/(?:19|20)\d{2}$|^(?:29\/0?2\/(?:19|20)(?:(?:[02468][048])|(?:[13579][26])))$',
@@ -41,6 +42,25 @@ def date_is_less_than_(start_date, end_date):
         return True
     return False
 
+def get_current_timestamp(from_timezone, to_timezone):
+    from_tz = pytz.timezone(from_timezone)
+    to_tz = pytz.timezone(to_timezone)
+    
+    dt_object = datetime.now(from_tz)
+    dt_object = dt_object.astimezone(to_tz)
+    
+    return int(dt_object.timestamp())
+
+def convert_to_another_timezone(str_time, from_timezone, to_timezone):
+    from_tz = pytz.timezone(from_timezone)
+    to_tz = pytz.timezone(to_timezone)
+    
+    dt_object = datetime.strptime(str_time, '%d/%m/%Y %H:%M')
+    dt_object = from_tz.localize(dt_object)
+    
+    dt_object = dt_object.astimezone(to_tz)
+    return int(dt_object.timestamp())
+    
 if __name__ == "__main__":
     seconds = 1000
     print(convert_to_date(seconds))
