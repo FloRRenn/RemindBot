@@ -3,10 +3,10 @@ from datetime import datetime
 from ultils.time_convert import is_valid_with_pattern, convert_to_another_timezone
 from random import randint
 
-# def convert_to_timestamp(datetime_string):
-#     datetime_object = datetime.strptime(datetime_string, '%d/%m/%Y %H:%M')
-#     timestamp = datetime.timestamp(datetime_object)
-#     return int(timestamp)
+def convert_to_timestamp(datetime_string):
+    datetime_object = datetime.strptime(datetime_string, '%d/%m/%Y %H:%M')
+    timestamp = datetime.timestamp(datetime_object)
+    return int(timestamp)
 
 class NewRemind(ui.Modal, title = "Tạo nhắc nhở"):
     title_ = ui.TextInput(label = "Tiêu đề", placeholder = "Nhập tiêu đề", min_length = 5, max_length = 100, style = TextStyle.short, required = True)
