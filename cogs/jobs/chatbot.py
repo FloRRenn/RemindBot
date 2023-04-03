@@ -86,7 +86,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     @_ask.error
     @_save_current_chat.error
     async def wait_for_next_chat(self, interaction : Interaction, error):
-        await interaction.response.send_message("Bot hiện tại đang trả lời câu hỏi của user. Vui lòng thực hiện lại sau khi bot đã trả lời xong.", ephemeral = True)
+        await interaction.followup.send("Bot hiện tại đang trả lời câu hỏi của user. Vui lòng thực hiện lại sau khi bot đã trả lời xong.", ephemeral = True)
         
     @tasks.loop(hours = 1)
     async def _auto_reset_chat(self):
