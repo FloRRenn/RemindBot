@@ -1,9 +1,7 @@
 from discord import app_commands, Interaction, File, Message
 from discord.ext import commands, tasks
-from typing import Optional
 
 import os
-from dotenv import load_dotenv
 
 from antispam import AntiSpamHandler, Options
 from antispam.plugins import AntiSpamTracker
@@ -16,6 +14,8 @@ from ultils.permission import is_botOwner
 from ultils.filter_content import filter
 
 is_not_answering = True
+auto_chat_is_not_answering = True
+
 def check_it_is_answering(interaction : Interaction = None):
     global is_not_answering
     return is_not_answering
@@ -50,6 +50,18 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         if not data:
             return []
         return [guild["channel_id"] for guild in data]
+    
+    async def send_answer(self, answer : str, send_type, filename):
+        if len(answer) < 2000:
+            return await send_type.send(answer)
+        
+        with open(filename, "w+", encoding = "utf-8") as f:
+            f.write(answer)
+        file = File(filename)
+        
+        await send_type.followup.send("**Bởi vì câu trả lời quá dài nên tôi sẽ gửi chúng dưới dạng file**", file = file)
+
+        os.remove(filename)
 
     @app_commands.command(name = "new_api_key")
     @is_botOwner()
@@ -80,17 +92,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         answer = await self.chatbot.ask(question)
 
         is_not_answering = True
-        if len(answer) < 2000:
-            return await interaction.followup.send(answer)
-        
-        filename = f"answer-for-user-{interaction.user.id}.txt"
-        with open(filename, "w+", encoding = "utf-8") as f:
-            f.write(answer)
-        file = File(filename)
-        
-        await interaction.followup.send("**Bởi vì câu trả lời quá dài nên tôi sẽ gửi chúng dưới dạng file**", file = file)
-
-        os.remove(filename)
+        await self.send_answer(answer, interaction.followup, f"answer-for-user-{interaction.user.id}.txt")
         
     @app_commands.command(name = "save_current_chat", description = "Lưu lại cuộc trò chuyện hiện tại")
     @app_commands.check(check_it_is_answering)
@@ -123,8 +125,13 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         
     @tasks.loop(hours = 1)
     async def _auto_reset_chat(self):
+        global auto_chat_is_not_answering
+        
         if not check_it_is_answering():
             self.chatbot.reset()
+            
+        if not auto_chat_is_not_answering:
+            self.chatbot_2.reset()
             
     @_auto_reset_chat.before_loop
     async def before_reset_checker(self):
@@ -167,19 +174,27 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         
     @commands.Cog.listener()
     async def on_message(self, message : Message):
+        global auto_chat_is_not_answering
+        
         if message.author.bot:
             return
         
         if message.channel.id in self.auto_chat_channel:
-            content = message.content
+            if not auto_chat_is_not_answering:
+                return await message.channel.send("Vui lòng đợi bot trả lời xong câu hỏi trước đó.", mention_author = True, delete_after = 5)
             
+            content = message.content
             await self.bot.handler.propagate(content)
+            
             if not filter(content) or await self.bot.tracker.is_spamming(message):
                 return await message.channel.send("Sao giống spam vậy. Muốn đánh nhau không?")
             
+            auto_chat_is_not_answering = False
             async with message.channel.typing():
                 answer = await self.chatbot_2.ask(message.content)
-                await message.channel.send(answer)
+                await self.send_answer(answer, message.channel, f"auto-answer-for-user-{message.author.id}.txt")
 
+            auto_chat_is_not_answering = True
+            
 async def setup(bot : commands.Bot):
     await bot.add_cog(ChatBot(bot))

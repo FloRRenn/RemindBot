@@ -16,12 +16,12 @@ class Bot(commands.Bot):
         super().__init__(command_prefix = "$$", intents = intent)
         
     async def setup_hook(self):
-        # cogs = ["bot.about", "bot.cmd",
-        #         "server.channel", "server.delete", "server.moderate", "server.server",
-        #          "jobs.reminder","jobs.chatbot","jobs.votes", "jobs.todo",
-        #           "other.emotion", "other.anime"]
-        cogs = ["jobs.chatbot"]
-        
+        cogs = ["bot.about", "bot.cmd",
+                "server.channel", "server.delete", "server.moderate", "server.server",
+                 "jobs.reminder","jobs.chatbot","jobs.votes", "jobs.todo",
+                  "other.emotion", "other.anime"]
+        # cogs = ["jobs.chatbot"]
+
         for cog in cogs:
             await self.load_extension(f"cogs.{cog}")
         
