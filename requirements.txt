@@ -6,3 +6,4 @@ python-dotenv==0.21.1
 pymongo
 tiktoken==0.3.1
 pytz==2022.7.1
+Discord-Anti-Spam==1.7.0
