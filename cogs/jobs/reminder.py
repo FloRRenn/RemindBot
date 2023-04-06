@@ -92,7 +92,24 @@ class Reminder(commands.GroupCog, name = "remind"):
         channel = self.db.find({"type" : "default_channel", "guild_id" : interaction.guild.id})
         pannelEdit = RemindEditPannel(self.db, remind_data, channel["default_channel"], title = f"Edit remind ID {remind_id}")
         await interaction.response.send_modal(pannelEdit)
+
+    async def _send_embed(self, remind, content, is_update = False, color = 0x00ff00):
+        channel = self.bot.get_channel(self.guild_cache[remind["guild_id"]])
+        message = await channel.fetch_message(remind['message_id'])
+        await message.delete()
         
+        embed = message.embeds[0]
+        user = f"<@&{remind['mention_id']}> - {content}"
+        
+        embed = Embed(title = remind["title"], description = remind["content"], color = color)
+        embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
+        if not is_update:
+            embed.set_thumbnail(url = "https://cdn-icons-png.flaticon.com/512/6459/6459980.png")
+        
+        message = await channel.send(user, embed = embed)
+        if is_update:
+            self.db.update({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]}, {"$set" : {"message_id" : message.id}})
+    
     @tasks.loop(minutes = 2)
     async def remind_checker(self):
         query = {"type" : "reminder"}
@@ -103,22 +120,20 @@ class Reminder(commands.GroupCog, name = "remind"):
             alignment = 120 // documents_count
             timestmap = datetime.now().timestamp()
             
+            _24h = 24 * 60 * 60
+            _6h = 6 * 60 * 60
+            
             for remind in reminds_list:
                 if timestmap >= remind["timestamp"]:
                     self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
+                    await self._send_embed(remind, "**Đã dến thời gian**")
                     
-                    channel = self.bot.get_channel(self.guild_cache[remind["guild_id"]])
-                    message = await channel.fetch_message(remind['message_id'])
-                    await message.delete()
+                elif _24h - 120 <= remind["timestamp"] <= _24h:
+                    await self._send_embed(remind, "**Còn khoảng 24h nữa là đến deadline rồi mấy cậu. Tốc độ lên :v**", True, 0xF9DE00)
                     
-                    embed = message.embeds[0]
-                    user = f"<@&{remind['mention_id']}> - **Đã dến thời gian**"
+                elif _6h - 120 <= remind["timestamp"] <= _6h:
+                    await self._send_embed(remind, "**6h nữa là dead rồi, lẹ đi.**", True, 0xF99B00)
                     
-                    embed = Embed(title = remind["title"], description = remind["content"], color = 0xFF0000)
-                    embed.set_footer(text = f"Remind ID: {remind['remind_id']}")
-                    embed.set_thumbnail(url = "https://cdn-icons-png.flaticon.com/512/6459/6459980.png")
-                    
-                    await channel.send(user, embed = embed)
                 timestmap += alignment
                 
     @remind_checker.before_loop

@@ -27,6 +27,8 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     @app_commands.command(name = "new_api_key")
     @is_botOwner()
     async def _set_api_key(self, interaction : Interaction, api_key : str):
+        await interaction.response.defer(thinking = True)
+        global is_not_answering
         data = {
             "api_key" : api_key,
             "type" : "api_key",
@@ -34,7 +36,11 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
         }
 
         self.db.update({"type" : "api_key"}, {"$set" : data})
-        await interaction.response.send_message("Update new API key", ephemeral = True)
+        while is_not_answering == False:
+            continue
+        
+        self.chatbot.api_key = api_key
+        await interaction.followup.send("Update new API key", ephemeral = True)
 
     @app_commands.command(name = "ask", description = "Đặt câu hỏi và bot sẽ trả lời")
     @app_commands.check(check_it_is_answering)
