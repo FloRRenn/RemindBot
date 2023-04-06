@@ -15,7 +15,7 @@ class ChatGPT:
                 ):
         
         self.api_key = api_key
-        self.system_prompt = "Hello, I need help!"
+        self.system_prompt = "Hello, How can I help you?"
         
         self.max_tokens = max_tokens
         self.temperature = temperature
@@ -34,6 +34,12 @@ class ChatGPT:
                                             "content": self.system_prompt,
                                         },
                                     ],
+                                    "auto" : [
+                                        {
+                                            "role": "system",
+                                            "content": self.system_prompt,
+                                        },
+                                    ]
                                 }
         
     def add_new_conversation(self, message: str, role: str, convo_id: str = "default"):

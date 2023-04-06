@@ -1,11 +1,19 @@
-from discord import app_commands, Interaction, File
+from discord import app_commands, Interaction, File, Message
 from discord.ext import commands, tasks
 from typing import Optional
+
 import os
+from dotenv import load_dotenv
+
+from antispam import AntiSpamHandler, Options
+from antispam.plugins import AntiSpamTracker
+from antispam.caches.mongo import MongoCache
+from antispam.enums import Library
 
 from ultils.chatgpt import ChatGPT
 from ultils.db_action import Database
 from ultils.permission import is_botOwner
+from ultils.filter_content import filter
 
 is_not_answering = True
 def check_it_is_answering(interaction : Interaction = None):
@@ -16,13 +24,32 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     def __init__(self, bot : commands.Bot):
         self.db = Database("gpt")
         self.bot = bot
+        
+        # Detect spamming
+        self.bot.handler = AntiSpamHandler(self.bot, Library.ENHANCED_DPY, options=Options(no_punish = True,  message_duplicate_count = 2))
+        self.bot.tracker = AntiSpamTracker(self.bot.handler, 5)
+        self.bot.handler.register_plugin(self.bot.tracker)
+        self.bot.handler.set_cache(MongoCache(self.bot.handler, self.load_mongo_uri()))
+        
+        # Chat bot
         self.chatbot = ChatGPT(self.load_api())
+        self.chatbot_2 = ChatGPT(self.load_api())
+        self.auto_chat_channel = self.load_auto_chat_channel()
+        
+    def load_mongo_uri(self):
+        return os.getenv("MONGODB_URI")
 
     def load_api(self):
         data = self.db.find({"type" : "api_key"})
         if not data:
             raise Exception("API key not found")
         return data["api_key"]
+    
+    def load_auto_chat_channel(self):
+        data = self.db.get_all({"type" : "auto_reply", "enable" : 'True'})
+        if not data:
+            return []
+        return [guild["channel_id"] for guild in data]
 
     @app_commands.command(name = "new_api_key")
     @is_botOwner()
@@ -102,6 +129,57 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
     @_auto_reset_chat.before_loop
     async def before_reset_checker(self):
         await self.bot.wait_until_ready()
+        
+        
+    @app_commands.command(name = "auto_answer", description = "Chọn kênh này làm kênh tự động trả lời tin nhắn")
+    @app_commands.choices(enable = [
+                                    app_commands.Choice(name = "Yes", value = "True"),
+                                    app_commands.Choice(name = "No", value = "False"),
+                                    ])
+    async def _set_auto_chat(self, interaction : Interaction, enable : app_commands.Choice[str]):
+        await interaction.response.defer(thinking = True)
+        
+        channel_id = interaction.channel.id
+        data = {
+                "type" : "auto_reply",
+                "enable" : enable.value,
+                "channel_id" : channel_id,
+                "guild_id" : interaction.guild.id
+            }
+            
+        self.db.update(
+                        {"type" : "auto_reply", "guild_id" : interaction.guild.id}, 
+                        {"$set" : data}, 
+                        upsert = True
+                    )
+
+        if enable.value == True:
+            if channel_id not in self.auto_chat_channel:
+                self.auto_chat_channel.append(channel_id)
+            await interaction.followup.send(f"Đã bật chế độ tự động trả lời tin nhắn tại kênh {interaction.channel.mention}", ephemeral = False)
+            
+        else:
+            if channel_id in self.auto_chat_channel:
+                self.auto_chat_channel.remove(channel_id)
+                return await interaction.followup.send(f"Đã tắt chế độ tự động trả lời tin nhắn tại kênh {interaction.channel.mention}", ephemeral = False)
+            
+            return await interaction.followup.send(f"Kênh {interaction.channel.mention} không được bật chế độ tự động trả lời tin nhắn", ephemeral = False)
+        
+    @commands.Cog.listener()
+    async def on_message(self, message : Message):
+        if message.author.bot:
+            return
+        
+        if message.channel.id in self.auto_chat_channel:
+            content = message.content
+            
+            await self.bot.handler.propagate(content)
+            if not filter(content) or await self.bot.tracker.is_spamming(message):
+                return await message.channel.send("Sao giống spam vậy. Muốn đánh nhau không?")
+            
+            async with message.channel.typing():
+                answer = await self.chatbot_2.ask(message.content)
+                await message.channel.send(answer)
 
 async def setup(bot : commands.Bot):
     await bot.add_cog(ChatBot(bot))
