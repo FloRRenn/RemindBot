@@ -153,7 +153,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
                         upsert = True
                     )
 
-        if enable.value == True:
+        if enable.value == 'True':
             if channel_id not in self.auto_chat_channel:
                 self.auto_chat_channel.append(channel_id)
             await interaction.followup.send(f"Đã bật chế độ tự động trả lời tin nhắn tại kênh {interaction.channel.mention}", ephemeral = False)
