@@ -6,7 +6,7 @@ from ultils.moddle import Moodle
 from ultils.time_convert import convert_to_another_timezone, datetime
 
 class MyMoodle(commands.GroupCog, name = "moodle"):
-    CHANNEL_ID = 1058633075166302258 
+    CHANNEL_ID = 1058633075166302258
     
     def __init__(self, bot : commands.Bot):
         self.bot = bot
@@ -46,7 +46,7 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
                 
                 message = await channel.send(self.mention_role, embed = embed)
                     
-                timestamp = convert_to_another_timezone(info["end_time"], "Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh") # 'Etc/GMT'
+                timestamp = convert_to_another_timezone(info["end_time"], "Asia/Ho_Chi_Minh", 'Etc/GMT')
                 info["timestamp"] = timestamp
                 info["message_id"] = message.id
                 self.db.insert(info)
