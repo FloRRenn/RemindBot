@@ -19,10 +19,10 @@ class Moodle:
         # monthnow
         # recentupcoming
         # custom
-        # async with self.session.get(self.url + preset_time) as resp:
-        #     return await resp.text(encoding = "utf-8")
-        with open("test.ics", "r", encoding = "utf-8") as f:
-            return f.read()
+        async with self.session.get(self.url + preset_time) as resp:
+            return await resp.text(encoding = "utf-8")
+        # with open("test.ics", "r", encoding = "utf-8") as f:
+        #     return f.read()
         
     def parse_data(self, raw_data):
         data = Calendar.from_ical(raw_data)
