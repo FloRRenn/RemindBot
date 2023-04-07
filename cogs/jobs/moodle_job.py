@@ -1,4 +1,4 @@
-from discord import app_commands, Interaction, TextChannel, Embed, Role
+from discord import app_commands, Interaction, Embed
 from discord.ext import commands, tasks
 
 from ultils.db_action import Database
@@ -6,7 +6,7 @@ from ultils.moddle import Moodle
 from ultils.time_convert import convert_to_another_timezone, datetime
 
 class MyMoodle(commands.GroupCog, name = "moodle"):
-    CHANNEL_ID = 1085012250781286450 # 1058633075166302258 
+    CHANNEL_ID = 1058633075166302258 
     
     def __init__(self, bot : commands.Bot):
         self.bot = bot
@@ -16,16 +16,16 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
         self.moodle = Moodle()
         self.moodle.new_session()
         
-        #self.moodle_checker.start()
+        self.moodle_checker.start()
         self.moodle_reminder.start()
         
-    @app_commands.command(name = "this_week", description = "Lấy deadline tuần này")
-    async def _this_week(self, interaction : Interaction):
-        await interaction.response.send_message(interaction.channel.id)
+    # @app_commands.command(name = "this_week", description = "Lấy deadline tuần này")
+    # async def _this_week(self, interaction : Interaction):
+    #     await interaction.response.send_message(interaction.channel.id)
     
-    @app_commands.command(name = "this_month", description = "Lấy deadline tháng này")
-    async def _this_month(self, interaction : Interaction):
-        pass
+    # @app_commands.command(name = "this_month", description = "Lấy deadline tháng này")
+    # async def _this_month(self, interaction : Interaction):
+    #     pass
     
     @tasks.loop(hours = 3)
     async def moodle_checker(self):
@@ -34,23 +34,23 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
             return
         
         channel = self.bot.get_channel(self.CHANNEL_ID)
-        print(data)
+        # print(data)
         for info in data:
-            #isExisted = self.db.find({"course_id" : info["course_id"]})
+            isExisted = self.db.find({"course_id" : info["course_id"]})
             
-            #if not isExisted:
-            timestamp_for_show = convert_to_another_timezone(info["end_time"], "Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh")
-            embed = Embed(title = info["title"], description = info["description"], color = 0x00ff00)
-            embed.add_field(name = "Deadline", value = f"{info['end_time']} <t:{timestamp_for_show}:R>")
-            embed.set_author(name = info["class"])
-            embed.set_thumbnail(url = "https://tuoitre.uit.edu.vn/wp-content/uploads/2015/07/logo-uit.png")
-            
-            message = await channel.send(self.mention_role, embed = embed)
+            if not isExisted:
+                timestamp_for_show = convert_to_another_timezone(info["end_time"], "Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh")
+                embed = Embed(title = info["title"], description = info["description"], color = 0x00ff00)
+                embed.add_field(name = "Deadline", value = f"{info['end_time']} <t:{timestamp_for_show}:R>")
+                embed.set_author(name = info["class"])
+                embed.set_thumbnail(url = "https://tuoitre.uit.edu.vn/wp-content/uploads/2015/07/logo-uit.png")
                 
-            timestamp = convert_to_another_timezone(info["end_time"], "Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh") # 'Etc/GMT'
-            info["timestamp"] = timestamp
-            info["message_id"] = message.id
-            self.db.insert(info)
+                message = await channel.send(self.mention_role, embed = embed)
+                    
+                timestamp = convert_to_another_timezone(info["end_time"], "Asia/Ho_Chi_Minh", "Asia/Ho_Chi_Minh") # 'Etc/GMT'
+                info["timestamp"] = timestamp
+                info["message_id"] = message.id
+                self.db.insert(info)
                 
     @tasks.loop(minutes = 2)
     async def moodle_reminder(self):
