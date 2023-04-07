@@ -187,7 +187,7 @@ class ChatBot(commands.GroupCog, name = "chatbot"):
             await self.bot.handler.propagate(content)
             
             if not filter(content) or await self.bot.tracker.is_spamming(message):
-                return await message.channel.send("Sao giống spam vậy. Muốn đánh nhau không?")
+                return 
             
             auto_chat_is_not_answering = False
             async with message.channel.typing():

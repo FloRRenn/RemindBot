@@ -1,6 +1,5 @@
-from discord import app_commands, Interaction, Member, TextChannel, Embed, Role
+from discord import app_commands, Interaction, TextChannel, Embed, Role
 from discord.ext import commands, tasks
-from typing import Optional
 
 from ultils.db_action import Database
 from ultils.panels import NewRemind, RemindEditPannel, \
@@ -120,19 +119,19 @@ class Reminder(commands.GroupCog, name = "remind"):
             alignment = 120 // documents_count
             timestmap = datetime.now().timestamp()
             
-            _24h = 24 * 60 * 60
-            _6h = 6 * 60 * 60
+            _24h = 24 * 60 * 60 + timestmap
+            _6h = 6 * 60 * 60 + timestmap
             
             for remind in reminds_list:
                 if timestmap >= remind["timestamp"]:
                     self.db.remove({"remind_id" : remind["remind_id"], "user_id" : remind["user_id"]})
                     await self._send_embed(remind, "**Đã dến thời gian**")
                     
-                elif _24h - 120 <= remind["timestamp"] <= _24h:
-                    await self._send_embed(remind, "**Còn khoảng 24h nữa là đến deadline rồi mấy cậu. Tốc độ lên :v**", True, 0xF9DE00)
-                    
-                elif _6h - 120 <= remind["timestamp"] <= _6h:
+                elif _6h - 150 <= remind["timestamp"] <= _6h:
                     await self._send_embed(remind, "**6h nữa là dead rồi, lẹ đi.**", True, 0xF99B00)
+                    
+                elif _24h - 150 <= remind["timestamp"] <= _24h:
+                    await self._send_embed(remind, "**Còn khoảng 24h nữa là đến deadline rồi mấy cậu. Tốc độ lên :v**", True, 0xF9DE00)
                     
                 timestmap += alignment
                 
