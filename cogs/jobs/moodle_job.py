@@ -34,7 +34,6 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
             return
         
         channel = self.bot.get_channel(self.CHANNEL_ID)
-        # print(data)
         for info in data:
             isExisted = self.db.find({"course_id" : info["course_id"]})
             

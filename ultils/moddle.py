@@ -7,8 +7,14 @@ class Moodle:
         self.url = f"https://courses.uit.edu.vn/calendar/export_execute.php?userid={os.getenv('MOODLE_ID')}&authtoken={os.getenv('MOODLE_AUTH_TOKEN')}&preset_what=courses&preset_time="
         self.session = None
         
+        self.header = {
+            'Cookie': f'_ga=GA1.3.510450955.1651059609; MoodleSession={os.getenv("MOODLE_SESSION")}; MOODLEID1_={os.getenv("MOODLE_ID1")}',
+            'Referer': 'https://courses.uit.edu.vn/calendar/export.php',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
+        }
+        
     def new_session(self):
-        self.session = aiohttp.ClientSession()
+        self.session = aiohttp.ClientSession(headers = self.header)
         
     def close_session(self):
         self.session.close()
@@ -21,8 +27,6 @@ class Moodle:
         # custom
         async with self.session.get(self.url + preset_time) as resp:
             return await resp.text(encoding = "utf-8")
-        # with open("test.ics", "r", encoding = "utf-8") as f:
-        #     return f.read()
         
     def parse_data(self, raw_data):
         data = Calendar.from_ical(raw_data)
@@ -42,8 +46,7 @@ class Moodle:
                     res.append(info)
                 except Exception as e:
                     print(e)
-                    print("Error: ", component)
-                    
+                    print("Error: ", component)         
         return res
     
     async def auto_get_data(self, preset_time):
@@ -52,4 +55,13 @@ class Moodle:
         
 if __name__ == "__main__":
     moddle = Moodle()
-    print(moddle.url)
+    
+    import requests
+    header = {
+        'Cookie': '_ga=GA1.3.510450955.1651059609; MoodleSession=k479v2kvpum21sfjltcsgdk6ks; MOODLEID1_=%25FF%25FF%250E%250B%258A%25A5%25D4%25BF',
+        'Referer': 'https://courses.uit.edu.vn/calendar/export.php',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36'
+    }
+    
+    resp = requests.get(moddle.url + "weeknow", headers = header)
+    print(resp.content)
