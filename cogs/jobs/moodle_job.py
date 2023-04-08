@@ -14,7 +14,7 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
         self.mention_role = "<@&1018874542132822077>"
         
         self.moodle = Moodle()
-        self.moodle.new_session()
+        #self.moodle.new_session()
         
         self.moodle_checker.start()
         self.moodle_reminder.start()
