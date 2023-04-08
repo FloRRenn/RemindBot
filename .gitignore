@@ -4,4 +4,7 @@
 # Log file
 discord.log
 
+# test file
+test.*
+
 **/__pycache__
