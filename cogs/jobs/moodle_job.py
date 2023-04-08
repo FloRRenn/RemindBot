@@ -29,7 +29,7 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
     
     @tasks.loop(hours = 3)
     async def moodle_checker(self):
-        data = await self.moodle.auto_get_data("weeknow")
+        data = await self.moodle.auto_get_data("monthnow")
         if not data:
             return
         
