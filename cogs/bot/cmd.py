@@ -15,32 +15,32 @@ class ManangeCOG(commands.GroupCog, name = "cog"):
     @app_commands.command(name = "load", description = "Load Cog's name")
     @is_botOwner()
     async def _load_cog(self, interaction : Interaction, name : str):
-        await interaction.response.send_message(f"Loading cog **{name}**...")
+        await interaction.response.send_message(f"Loading cog **{name}**...", empheral = True)
         try:
-            await self.bot.load_extension(f"cogs.{name}")
+            await self.bot.load_extension(name)
             
         except ExtensionNotFound:
-            await interaction.edit_original_response(content = f"Loading cog **{name}**... _DONE_")
+            await interaction.edit_original_response(content = f"Loading cog **{name}**... _DONE_", empheral = True)
             
         except ExtensionAlreadyLoaded:
-            await interaction.edit_original_response(content = f"Cog **{name}**... \n**LOAD THẤT BẠI:** `Cog đã được load trước đó.`")
+            await interaction.edit_original_response(content = f"Cog **{name}**... \n**LOAD THẤT BẠI:** `Cog đã được load trước đó.`", empheral = True)
             
         except ExtensionFailed:
-            await interaction.edit_original_response(content = f"Cog **{name}**... \n**LOAD THẤT BẠI:** `Xảy ra lỗi khi load. Xem log để biết thêm chi tiết.`")
+            await interaction.edit_original_response(content = f"Cog **{name}**... \n**LOAD THẤT BẠI:** `Xảy ra lỗi khi load. Xem log để biết thêm chi tiết.`", empheral = True)
         
     @app_commands.command(name = "reload", description = "Reload Cog's name")
     @is_botOwner()
     async def _reload_cog(self, interaction : Interaction, name : str):
         await interaction.response.send_message(f"Reloading cog **{name}**...")
         try:
-            await self.bot.reload_extension(f"cogs.{name}")
-            await interaction.edit_original_response(content = f"Reloading cog **{name}**... _DONE_")
+            await self.bot.reload_extension(name)
+            await interaction.edit_original_response(content = f"Reloading cog **{name}**... _DONE_", empheral = True)
             
         except ExtensionNotFound:
-            await interaction.edit_original_response(content = f"Cog **{name}**... \n**RELOAD THẤT BẠI:** `Không tìm thấy Cog`")
+            await interaction.edit_original_response(content = f"Cog **{name}**... \n**RELOAD THẤT BẠI:** `Không tìm thấy Cog`", empheral = True)
             
         except ExtensionNotLoaded:
-            await interaction.edit_original_response(content = f"Cog **{name}**... \n**RELOAD THẤT BẠI:** `Không thể load Cog này`")
+            await interaction.edit_original_response(content = f"Cog **{name}**... \n**RELOAD THẤT BẠI:** `Không thể load Cog này`", empheral = True)
             
     @app_commands.command(name = "stop", description = "Stop Cog's name")
     @is_botOwner()
@@ -48,14 +48,14 @@ class ManangeCOG(commands.GroupCog, name = "cog"):
         await interaction.response.send_message(f"Stopping cog **{name}**...")
         
         try:
-            await self.bot.unload_extension(f"cogs.{name}")
-            await interaction.edit_original_response(content = f"Stopping cog **{name}**... _DONE_")
+            await self.bot.unload_extension(name)
+            await interaction.edit_original_response(content = f"Stopping cog **{name}**... _DONE_", empheral = True)
         
         except ExtensionNotFound:
-            await interaction.edit_original_response(content = f"Cog **{name}**... \n**DỪNG THẤT BẠI:** `Không tìm thấy Cog`")
+            await interaction.edit_original_response(content = f"Cog **{name}**... \n**DỪNG THẤT BẠI:** `Không tìm thấy Cog`", empheral = True)
             
         except ExtensionNotLoaded:
-            await interaction.edit_original_response(content = f"Cog **{name}**... \n**DỪNG THẤT BẠI:** `Không thể load Cog này`")
+            await interaction.edit_original_response(content = f"Cog **{name}**... \n**DỪNG THẤT BẠI:** `Không thể load Cog này`", empheral = True)
             
 class ManangeCMD(commands.GroupCog, name = "cmd"):
     def __init__(self, bot: commands.Bot) -> None:

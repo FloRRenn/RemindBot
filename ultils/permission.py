@@ -13,3 +13,4 @@ def is_botOwner():
         return False
     
     return app_commands.check(checkUser)
+
