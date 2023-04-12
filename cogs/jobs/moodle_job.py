@@ -74,9 +74,6 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
         await self.bot.wait_until_ready()
                  
     async def process_notification(self, channel, info, day, _12h):
-        if info["timestamp"] > day:
-            return 
-
         content = ''
         
         if info["timestamp"] - day >= 0:
