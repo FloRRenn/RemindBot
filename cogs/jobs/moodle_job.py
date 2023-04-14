@@ -64,27 +64,31 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
             
             day = 24 * 60 * 60 + timestamp # seconds
             _12h = 12 * 60 * 60 + timestamp # seconds
+            _5m = 5 * 60 + timestamp # seconds
             
             for info in data:
-                await self.process_notification(channel, info, day, _12h)
+                await self.process_notification(channel, info, day, _12h, _5m)
                 
     @moodle_checker.before_loop
     @moodle_reminder.before_loop
     async def before(self):
         await self.bot.wait_until_ready()
                  
-    async def process_notification(self, channel, info, day, _12h):
+    async def process_notification(self, channel, info, day, _12h, _5m):
         content = ''
         
-        if info["timestamp"] - day >= 0:
-            content = "**Đến deadline rồi**. Còn gì đâu để mất nữa :v"
-            self.db.remove({"course_id" : info["course_id"]})
-        
+        if day - 120 < info["timestamp"] <= day:
+            content = "Còn **1 ngày** nữa là đến deadline. Đừng xàm lông nữa :v."
+            
         elif _12h - 120 < info["timestamp"] <= _12h:
             content = "Còn **12 giờ** nữa là đến deadline, tốc độ lên."
-
-        elif day - 120 < info["timestamp"] <= day:
-            content = "Còn **1 ngày** nữa là đến deadline. Đừng xàm lông nữa :v."
+            
+        elif _5m - 60 < info["timestamp"] <= _5m:
+            content = "Còn **5 phút nữa**"
+        
+        elif info["timestamp"] >= day:
+            content = "**Đến deadline rồi**. Còn gì đâu để mất nữa :v"
+            self.db.remove({"course_id" : info["course_id"]})
             
         if content:
             message = await channel.fetch_message(info["message_id"])
