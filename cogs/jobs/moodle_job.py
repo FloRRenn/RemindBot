@@ -85,10 +85,8 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
             
         elif _5m - 60 < info["timestamp"] <= _5m:
             content = "Còn **5 phút nữa**"
-        
-        elif info["timestamp"] >= day:
-            content = "**Đến deadline rồi**. Còn gì đâu để mất nữa :v"
             self.db.remove({"course_id" : info["course_id"]})
+            
             
         if content:
             message = await channel.fetch_message(info["message_id"])
