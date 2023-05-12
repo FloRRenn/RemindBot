@@ -26,10 +26,10 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
         await interaction.response.send_message(response)
 
     
-    @app_commands.command(name = "pingz", description = "Lấy deadline tháng này")
-    async def _this_month(self, interaction : Interaction, user_input : str):
-        response = os.system("ping -c 1 " + user_input)
-        await interaction.response.send_message(response)    
+    # @app_commands.command(name = "pingz", description = "Lấy deadline tháng này")
+    # async def _this_month(self, interaction : Interaction, user_input : str):
+    #     response = os.system("ping -c 1 " + user_input)
+    #     await interaction.response.send_message(response)    
     
     @tasks.loop(hours = 3)
     async def moodle_checker(self):
