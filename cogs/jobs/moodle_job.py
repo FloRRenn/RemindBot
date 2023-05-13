@@ -20,10 +20,10 @@ class MyMoodle(commands.GroupCog, name = "moodle"):
         self.moodle_checker.start()
         self.moodle_reminder.start()
         
-    @app_commands.command(name = "hack", description = "Lấy acc moodle th Tấn")
-    async def _this_week(self, interaction : Interaction):
-        response = os.getenv('MOODLE_AUTH_TOKEN')
-        await interaction.response.send_message(response)
+    # @app_commands.command(name = "hack", description = "Lấy acc moodle th Tấn")
+    # async def _this_week(self, interaction : Interaction):
+    #     response = os.getenv('MOODLE_AUTH_TOKEN')
+    #     await interaction.response.send_message(response)
 
     
     # @app_commands.command(name = "pingz", description = "Lấy deadline tháng này")
