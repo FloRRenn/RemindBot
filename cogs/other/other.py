@@ -21,7 +21,7 @@ class TestCMD(commands.Cog):
     async def send_anoynimous_msg(self, interaction : Interaction, message : str, 
                                   file : Optional[Attachment],
                                   send_to : Optional[TextChannel]):
-        await interaction.response.defer()
+        await interaction.response.defer(ephemeral = True)
         
         if len(message) >= 2000:
             return await interaction.followup.send("Tin nhắn quá dài", ephemeral = False)    
