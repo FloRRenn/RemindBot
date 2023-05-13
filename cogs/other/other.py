@@ -26,11 +26,12 @@ class TestCMD(commands.Cog):
         if len(message) >= 2000:
             return await interaction.followup.send("Tin nhắn quá dài", ephemeral = False)    
         
+        userID = interaction.user.id
+        
         if isinstance(interaction.channel, PartialMessageable):
             def check(message):
                 return message.author.id == interaction.user.id
             
-            userID = interaction.user.id
             if userID not in self.list_anoynimous:
                 await interaction.followup.send("Hãy nhập ID kênh sẽ gửi tin nhắn đến", ephemeral = True)  
                 isOke = False
@@ -57,7 +58,10 @@ class TestCMD(commands.Cog):
                 
         else:
             if send_to is None:
-                send_to = interaction.channel
+                if userID in self.list_anoynimous:
+                    send_to = await self.bot.fetch_channel(self.list_anoynimous[userID])
+                else:
+                    send_to = interaction.channel
             
         list_webhooks = await send_to.webhooks()
         if len(list_webhooks) == 0:
