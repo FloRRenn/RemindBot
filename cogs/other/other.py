@@ -24,7 +24,7 @@ class TestCMD(commands.Cog):
         await interaction.response.defer()
         
         if len(message) >= 2000:
-            return await interaction.followup.send("Tin nhắn quá dài", ephemeral = True)    
+            return await interaction.followup.send("Tin nhắn quá dài", ephemeral = False)    
         
         if isinstance(interaction.channel, PartialMessageable):
             def check(message):
@@ -70,7 +70,7 @@ class TestCMD(commands.Cog):
         else:
             await webhook.send(content = message)
             
-        await interaction.followup.send("Đã gửi đến kênh " + send_to.mention, ephemeral = True)
+        await interaction.followup.send("Đã gửi đến kênh " + send_to.mention, ephemeral = False)
         
         
 async def setup(bot : commands.Bot):
