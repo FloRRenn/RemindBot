@@ -1,5 +1,6 @@
 # ENV file
 .env
+myenv/
 
 # Log file
 discord.log

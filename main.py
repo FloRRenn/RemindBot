@@ -18,8 +18,8 @@ class Bot(commands.Bot):
     async def setup_hook(self):
         cogs = ["bot.about", "bot.cmd",
                 "server.channel", "server.delete", "server.moderate", "server.server",
-                 "jobs.reminder","jobs.votes", "jobs.todo", "jobs.moodle_job",
-                  "other.emotion", "other.anime", "other.other", "other.xamLoz"] #"jobs.chatbot",
+                 "jobs.reminder","jobs.votes", "jobs.todo",
+                  "other.emotion", "other.anime", "other.other", "other.xamLoz"] #"jobs.chatbot", "jobs.moodle_job"
         # cogs = ["other.xamLoz"]
 
         for cog in cogs:
